@@ -32,9 +32,8 @@ export async function getTablesInfo (db, fixtures) {
  */
 export async function queryInfoSchema (db, name) {
   const cols = await db('information_schema.columns').where('table_name', name)
-  const colInfo = cols.map(mapColumns)
 
-  return [name, fromEntries(colInfo)]
+  return [name, fromEntries(cols.map(mapColumns))]
 }
 
 /**
