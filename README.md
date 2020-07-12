@@ -98,7 +98,7 @@ Primary keys on models are auto generated as UUIDs so the values that are refere
 
 ## Documentation
 
-The default export is the `Zero` class, but there is a named export called `seed` that instantiates the Zero for you while accepting the same arguments. For most standard configurations, `seed` will suffice, unless you're interested in the other methods that Zero provides.
+The default export is the `Zero` class, but there is a named export called `seed` that instantiates Zero for you while accepting the same arguments. For most standard configurations, `seed` will suffice, unless you're interested in the other methods that Zero provides.
 
 *More documentation coming soon...*
 
