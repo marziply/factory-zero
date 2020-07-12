@@ -1,0 +1,45 @@
+{
+  "name": "factory-zero",
+  "version": "0.0.1",
+  "description": "Knex based fixtures seeding utility",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bakewellcake/factory-zero.git"
+  },
+  "keywords": [
+    "fixtures",
+    "seed",
+    "seeding",
+    "knex",
+    "sql",
+    "database",
+    "relations",
+    "polymorphic",
+    "polymorphic-relations"
+  ],
+  "author": "Hayden Perry",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bakewellcake/factory-zero/issues"
+  },
+  "homepage": "https://github.com/bakewellcake/factory-zero#readme",
+  "dependencies": {
+    "knex": "^0.21.1",
+    "lodash": "^4.17.15",
+    "pluralize": "^8.0.0",
+    "uuid": "^8.0.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "debug": "^4.1.1",
+    "eslint": "^6.8.0",
+    "eslint-plugin-jsdoc": "^24.0.6",
+    "husky": "^4.2.5",
+    "jest": "^26.0.1",
+    "pg": "^8.0.3"
+  }
+}

@@ -1,0 +1,78 @@
+import without from 'lodash/without.js'
+import debug from 'debug'
+
+const {
+  keys,
+  entries,
+  create,
+  fromEntries,
+  getPrototypeOf,
+  getOwnPropertyNames,
+  getOwnPropertyDescriptors
+} = Object
+
+export const log = debug('zero')
+
+/**
+ * Converts a Model instance to a plain object.
+ *
+ * @param {Model} instance - Instance of a Model.
+ *
+ * @returns {object} - Plain object of the given Model instance.
+ */
+export function toJson (instance) {
+  const proto = getPrototypeOf(instance)
+  const modelKeys = getOwnPropertyNames(proto).concat(keys(instance))
+  const modelMap = without(modelKeys, 'constructor')
+    .filter(key => !!instance.$options.table.columns[key])
+    .map(key => [key, instance[key]])
+
+  return fromEntries(modelMap)
+}
+
+/**
+ * Clones an object, including getters/setters and class prototypes.
+ *
+ * @param {object} object - Data object to clone.
+ *
+ * @returns {object} - Cloned object.
+ */
+export function clone (object) {
+  return create(getPrototypeOf(object), getOwnPropertyDescriptors(object))
+}
+
+/**
+ * @param {object} object - Object data to filter over.
+ * @param {Function} predicate - Test function.
+ *
+ * @returns {object} - Filtered object.
+ */
+export function filterKeys (object, predicate) {
+  const objectClone = clone(object)
+
+  for (const key of keys(object)) {
+    if (predicate(key)) continue
+
+    delete objectClone[key]
+  }
+
+  return objectClone
+}
+
+/**
+ * @param {object} object - Object data to filter over.
+ * @param {Function} predicate - Test function.
+ *
+ * @returns {object} - Filtered object.
+ */
+export function filterValues (object, predicate) {
+  const objectClone = clone(object)
+
+  for (const [key, value] of entries(objectClone)) {
+    if (predicate(value)) continue
+
+    delete objectClone[key]
+  }
+
+  return objectClone
+}
