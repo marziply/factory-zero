@@ -1,7 +1,8 @@
+export const model = {
+  name: 'Video'
+}
+
 export default {
-  _model: {
-    name: 'Video'
-  },
   first_video: {
     name: 'First Video',
     url: 'https://factory-zero.com/assets/videos/first-video.mkv',

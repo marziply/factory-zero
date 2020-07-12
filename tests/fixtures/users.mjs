@@ -1,7 +1,8 @@
+export const model = {
+  name: 'User'
+}
+
 export default {
-  _model: {
-    name: 'User'
-  },
   john: {
     first_name: 'John',
     last_name: 'Doe',

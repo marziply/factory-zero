@@ -1,7 +1,8 @@
+export const model = {
+  name: 'Comment'
+}
+
 export default {
-  _model: {
-    name: 'Comment'
-  },
   first_comment: {
     body: 'Aliquam tristique, ligula eu imperdiet lacinia, nibh neque cursus justo, non congue magna libero a enim.',
     user_id: '@users.john',

@@ -63,9 +63,15 @@ export async function mapFixtures (path, files) {
  */
 export async function createFixtureMapping (path, file) {
   const [name, ext] = file.match(/^[^.]+|[^.]+$/g)
-  const fixture = await importFixture(`${path}/${file}`, ext)
+  const imported = await importFixture(`${path}/${file}`, ext)
+  const fixture = {
+    data: imported.default,
+    get model () {
+      return imported.model ?? this.data._model ?? {}
+    }
+  }
 
-  return [name, fixture.default || fixture]
+  return [name, fixture]
 }
 
 /**

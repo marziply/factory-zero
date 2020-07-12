@@ -1,7 +1,8 @@
+export const model = {
+  name: 'Post'
+}
+
 export default {
-  _model: {
-    name: 'Post'
-  },
   first_post: {
     body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia mauris eget quam fringilla aliquet.',
     user_id: '@users.john'

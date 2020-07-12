@@ -1,7 +1,8 @@
+export const model = {
+  name: 'Role'
+}
+
 export default {
-  _model: {
-    name: 'Role'
-  },
   first_role: {
     role: 1,
     user_id: '@users.john'
