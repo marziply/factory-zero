@@ -43,7 +43,7 @@ in Zero&#39;s options.</p>
 ## Typedefs
 
 <dl>
-<dt><a href="#Suffixes">Suffixes</a> : <code>object</code></dt>
+<dt><a href="#ZeroOptions">ZeroOptions</a> : <code>object</code></dt>
 <dd><p>Factory Zero options schema.</p>
 </dd>
 </dl>
@@ -207,11 +207,11 @@ Clones an object, including getters/setters and class prototypes.
 | Param | Type | Description |
 | --- | --- | --- |
 | knex | <code>Knex</code> \| <code>object</code> | Knex instance or a knex connection object. |
-| options | <code>ZeroOptions</code> | Factory Zero options. |
+| options | [<code>ZeroOptions</code>](#ZeroOptions) | Factory Zero options. |
 
-<a name="Suffixes"></a>
+<a name="ZeroOptions"></a>
 
-## Suffixes : <code>object</code>
+## ZeroOptions : <code>object</code>
 Factory Zero options schema.
 
 **Kind**: global typedef  
@@ -219,13 +219,13 @@ Factory Zero options schema.
 
 | Name | Type | Description |
 | --- | --- | --- |
-| primaryKey | <code>string</code> | Primary key column name. |
-| directory | <code>string</code> | Full path to a directory of fixtures. |
-| extensions | <code>Array.&lt;string&gt;</code> | Acceptable file extensions for fixtures. |
-| subdirs | <code>boolean</code> | Should sub directories be searched? |
-| polymorphism | <code>Polymorphism</code> | asdf |
-| capitaliseType | <code>boolean</code> | Should polymorphed resource types be capitalised? |
-| suffixes | [<code>Suffixes</code>](#Suffixes) | Suffixes for polymorphed resources. |
-| type | <code>string</code> | Suffix for the type of the resource. |
-| id | <code>string</code> | Suffix for the id of the resource. |
+| pk | <code>string</code> | Default primary key for all models. |
+| directory | <code>string</code> | Path to fixture files. |
+| extensions | <code>Array.&lt;string&gt;</code> | Fixture file extensions to search for. |
+| keys | <code>object</code> | Configurable keys for storing options relating to this program. |
+| keys.options | <code>string</code> | Key to use on Model instances for options. |
+| keys.model | <code>string</code> | Key to use for model options within the fixtures. |
+| suffixes | <code>object</code> | Polymorphic column suffixes. |
+| suffixes.type | <code>string</code> | Suffix used for the polymorphic type column. |
+| suffixes.id | <code>string</code> | Suffix used for the polymorphic id column. |
 

@@ -5,7 +5,7 @@
   "main": "index.mjs",
   "scripts": {
     "test": "jest",
-    "docs:generate": "jsdoc2md -c .jsdoc.json **/*.mjs > DOCS.md"
+    "docs:generate": "jsdoc2md -c .jsdoc.json ./**/*.mjs > DOCS.md"
   },
   "repository": {
     "type": "git",
