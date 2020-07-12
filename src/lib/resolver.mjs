@@ -55,7 +55,7 @@ export default class Resolver {
       table: { columns },
       suffixes: { type, id },
       fixtures
-    } = model.$options
+    } = model._options
 
     for (const [polyName, relationKey] of entries(relations)) {
       const polyType = polyName + type

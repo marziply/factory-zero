@@ -11,6 +11,7 @@ export const DEFAULT_OPTIONS = {
   pk: 'id',
   directory: './tests/fixtures',
   extensions: ['mjs', 'js', 'json'],
+  keys: {},
   suffixes: {
     type: '_type',
     id: '_id'
@@ -52,8 +53,7 @@ export default class Zero {
       const [nameSection] = path.split('.')
       const tableName = nameSection.slice(1)
 
-      console.log(toJson(fixture))
-      // return this.db(tableName).insert(toJson(fixture))
+      return this.db(tableName).insert(toJson(fixture))
     })
 
     return Promise.all(queries).then(() => log('Fixtures seeded'))

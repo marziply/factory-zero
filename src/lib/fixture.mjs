@@ -18,7 +18,7 @@ export default class Fixture {
     for (const [key, pointer] of Object.entries(relations)) {
       const relation = insertMap.get(pointer)
 
-      set(model, key, relation[relation.$options.table.pk])
+      set(model, key, relation[relation._options.table.pk])
     }
   }
 }
