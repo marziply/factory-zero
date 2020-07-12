@@ -7,70 +7,68 @@ const { entries } = Object
 export default class Resolver {
   constructor (options) {
     this.options = options
-    this.resolveables = new Map()
-    this.insertables = new Map()
+    this.insertMap = new Map()
+    this.relationMap = new Map()
   }
 
-  resolveRelations () {
-    const { options, resolveables, insertables } = this
+  relate () {
+    const { options, relationMap, insertMap } = this
 
-    for (const item of this.buildResolveQueue()) {
-      item.resolve(options.primaryKey, resolveables, insertables)
+    for (const item of this.fixtureTables()) {
+      item.resolve(options.primaryKey, relationMap, insertMap)
     }
 
-    return this.insertables
+    return this.insertMap
   }
 
-  buildResolveQueue () {
+  fixtureTables () {
     return entries(this.options.fixtures)
       .flatMap(([tableName, data]) => {
         const table = new Table(this.options, data, tableName)
 
-        return this.buildRelations(table)
+        return this.fixtureModels(table)
       })
   }
 
-  buildRelations (table) {
+  fixtureModels (table) {
     for (const { data, name } of table.fixtures) {
       const model = new Model(this.options, table, data)
+      const path = `@${table.name}.${name}`
 
-      this.appendModel(model, table.name, name)
+      this.insertMap.set(path, model)
+      this.relationMap.set(path, this.relations(model))
     }
 
     return table.fixtures
   }
 
-  appendModel (model, tableName, fixtureName) {
-    const path = `@${tableName}.${fixtureName}`
-
-    this.insertables.set(path, model)
-    this.resolveables.set(path, this.unresolvedRelations(model))
-  }
-
-  unresolvedRelations (model) {
+  relations (model) {
     const relations = filterValues(model, v => v.toString().match(/^@[\w]+/g))
 
-    return this.polymorph(model, relations)
-  }
-
-  polymorph (model, relations) {
-    const { table } = model.$options
-
-    for (const [key, value] of entries(relations)) {
-      const polyType = key + this.options.suffixes.type
-      const polyId = key + this.options.suffixes.id
-
-      if (!table.columns[key] && table.columns[polyType] && table.columns[polyId]) {
-        const [relatedTableName] = value.slice(1).split('.')
-
-        model[polyType] = this.options.fixtures[relatedTableName].model.name
-
-        relations[polyId] = value
-
-        delete model[key]
-      }
-    }
+    this.applyPolymorphism(model, relations)
 
     return relations
+  }
+
+  applyPolymorphism (model, relations) {
+    const {
+      table: { columns },
+      suffixes: { type, id },
+      fixtures
+    } = model.$options
+
+    for (const [polyName, relationKey] of entries(relations)) {
+      const polyType = polyName + type
+      const polyId = polyName + id
+
+      if (!columns[polyName] && columns[polyType] && columns[polyId]) {
+        const [relatedTableName] = relationKey.slice(1).split('.')
+
+        model[polyType] = fixtures[relatedTableName].model.name
+        relations[polyId] = relationKey
+
+        delete model[polyName]
+      }
+    }
   }
 }

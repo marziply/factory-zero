@@ -1,7 +1,4 @@
-import lodash from 'lodash'
-
-const { entries } = Object
-const { set } = lodash
+import set from 'lodash/set.js'
 
 export default class Fixture {
   constructor (name, data) {
@@ -13,12 +10,12 @@ export default class Fixture {
     for (const [key, relations] of resolveables) {
       const model = insertables.get(key)
 
-      this.#set(pk, model, relations, insertables)
+      this.set(pk, model, relations, insertables)
     }
   }
 
-  #set = (pk, model, relations, insertables) => {
-    for (const [key, pointer] of entries(relations)) {
+  set (pk, model, relations, insertables) {
+    for (const [key, pointer] of Object.entries(relations)) {
       const relation = insertables.get(pointer)
 
       set(model, key, relation[pk])

@@ -19,14 +19,14 @@ export const DEFAULT_OPTIONS = {
 
 export default class Zero {
   constructor (connection, options = {}) {
-    this.db = this.#createKnex(connection)
+    this.db = this.createKnex(connection)
     this.options = defaults(options, DEFAULT_OPTIONS)
   }
 
   async seed () {
     return this.setup()
       .then(() => this.clear())
-      .then(() => this.#relate())
+      .then(() => this.relate())
       .then(fixtures => this.insert(fixtures))
       .catch(console.error)
       .finally(() => this.db.destroy())
@@ -58,9 +58,15 @@ export default class Zero {
     return Promise.all(queries).then(() => log('Fixtures seeded'))
   }
 
-  #relate = () => new Resolver(this.options).resolveRelations()
+  relate () {
+    return new Resolver(this.options).relate()
+  }
 
-  #createKnex = kx => this.#isKnex(kx) ? kx : knex(kx)
+  createKnex (kx) {
+    return this.isKnex(kx) ? kx : knex(kx)
+  }
 
-  #isKnex = kx => typeof kx === 'function' && kx.name === 'knex' && kx.context
+  isKnex (kx) {
+    return typeof kx === 'function' && kx.name === 'knex' && kx.context
+  }
 }
