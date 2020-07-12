@@ -1,3 +1,4 @@
+import { filterValues } from '../utils.mjs'
 import Model from './model.mjs'
 import Table from './table.mjs'
 
@@ -25,24 +26,47 @@ export default class Resolver {
       .flatMap(([tableName, data]) => {
         const table = new Table(this.options, data, tableName)
 
-        return this.buildRelations(table, this.options.suffixes)
+        return this.buildRelations(table)
       })
   }
 
-  buildRelations (table, suffixes) {
-    for (const fixture of table.fixtures) {
-      const model = new Model(table, suffixes, fixture)
+  buildRelations (table) {
+    for (const { data, name } of table.fixtures) {
+      const model = new Model(this.options, table, data)
 
-      this.appendModel(model, table, suffixes, fixture)
+      this.appendModel(model, table.name, name)
     }
 
     return table.fixtures
   }
 
-  appendModel (model, table, suffixes, fixture) {
-    const path = `@${table.name}.${fixture.name}`
+  appendModel (model, tableName, fixtureName) {
+    const path = `@${tableName}.${fixtureName}`
 
     this.insertables.set(path, model)
-    this.resolveables.set(path, model.$relations(table, suffixes, fixture.data))
+    this.resolveables.set(path, this.unresolvedRelations(model))
+  }
+
+  unresolvedRelations (model) {
+    const relations = filterValues(model, v => v.toString().match(/^@[\w]+/g))
+
+    return this.polymorph(model, relations, model.$options.table)
+  }
+
+  polymorph (model, relations, table) {
+    for (const [key, value] of entries(relations)) {
+      const polyType = key + this.options.suffixes.type
+      const polyId = key + this.options.suffixes.id
+
+      if (!table.columns[key] && table.columns[polyType] && table.columns[polyId]) {
+        model[polyType] = table.model.name
+
+        relations[polyId] = value
+
+        delete model[key]
+      }
+    }
+
+    return relations
   }
 }
