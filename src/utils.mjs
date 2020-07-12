@@ -1,4 +1,6 @@
 import without from 'lodash/without.js'
+import isPlainObject from 'lodash/isPlainObject.js'
+import isArray from 'lodash/isArray.js'
 import debug from 'debug'
 
 const {
@@ -25,7 +27,12 @@ export function toJson (instance) {
   const modelKeys = getOwnPropertyNames(proto).concat(keys(instance))
   const modelMap = without(modelKeys, 'constructor')
     .filter(key => !!instance.$options.table.columns[key])
-    .map(key => [key, instance[key]])
+    .map(key => {
+      const cell = instance[key]
+      const isJson = isPlainObject(cell) || isArray(cell)
+
+      return [key, isJson ? JSON.stringify(cell) : cell]
+    })
 
   return fromEntries(modelMap)
 }

@@ -38,7 +38,9 @@ export default class Model {
     return this.$polymorph(relations, table, suffixes)
   }
 
-  get id () {
-    return uuid()
-  }
+  id = uuid()
+
+  created_at = new Date().toISOString()
+
+  updated_at = new Date().toISOString()
 }
