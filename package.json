@@ -7,6 +7,12 @@
     "test": "jest",
     "docs:generate": "jsdoc2md -c .jsdoc.json ./**/*.mjs > DOCS.md"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bakewellcake/factory-zero.git"
