@@ -1,5 +1,4 @@
 import defaults from 'lodash/defaults.js'
-import isFunction from 'lodash/isFunction.js'
 import knex from 'knex'
 import { loadFixtures } from './loader.mjs'
 import { getTablesInfo } from './schemaInfo.mjs'
@@ -61,7 +60,7 @@ export default class Zero {
 
   #relate = () => new Resolver(this.options).resolveRelations()
 
-  #createKnex = ctx => this.#isKnex(ctx) ? ctx : knex(ctx)
+  #createKnex = kx => this.#isKnex(kx) ? kx : knex(kx)
 
-  #isKnex = ctx => isFunction(ctx) && ctx.name === 'knex' && ctx.context
+  #isKnex = kx => typeof kx === 'function' && kx.name === 'knex' && kx.context
 }
