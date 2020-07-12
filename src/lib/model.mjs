@@ -2,6 +2,7 @@ import { v4 as uuid } from 'uuid'
 import { filterValues } from '../utils.mjs'
 
 const { assign, entries } = Object
+const now = new Date().toISOString()
 
 export default class Model {
   constructor (table, suffixes, fixture) {
@@ -40,7 +41,7 @@ export default class Model {
 
   id = uuid()
 
-  created_at = new Date().toISOString()
+  created_at = now
 
-  updated_at = new Date().toISOString()
+  updated_at = now
 }
