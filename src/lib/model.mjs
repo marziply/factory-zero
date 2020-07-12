@@ -8,7 +8,7 @@ export default class Model {
 
     this[table.pk] = uuid()
 
-    this._options = {
+    this[options.keys.options] = {
       ...options,
       table
     }

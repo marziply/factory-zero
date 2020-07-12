@@ -18,7 +18,7 @@ const root = dirname(process.argv[1])
 export function loadFixtures (options) {
   const { path, files } = getFixtureFiles(options)
 
-  return mapFixtures(path, files)
+  return mapFixtures(options.keys.model, path, files)
 }
 
 /**
@@ -39,13 +39,14 @@ export function getFixtureFiles ({ directory, extensions }) {
 /**
  * Maps fixture files into an object.
  *
+ * @param {string} key - Fixtures model key.
  * @param {string} path - Directory path to the fixtures directory.
  * @param {Array.<object>} files - Retrieved fixture files.
  *
  * @returns {object} - Mapped fixtures into an object.
  */
-export async function mapFixtures (path, files) {
-  const mappedFiles = files.map(createFixtureMapping.bind(null, path))
+export async function mapFixtures (key, path, files) {
+  const mappedFiles = files.map(createFixtureMapping.bind(null, key, path))
   const fixtures = await Promise.all(mappedFiles)
 
   log('Imported fixture files from ' + path)
@@ -56,18 +57,19 @@ export async function mapFixtures (path, files) {
 /**
  * Imports an individual fixture file.
  *
+ * @param {string} key - Fixtures model key.
  * @param {string} path - Directory path to the fixtures directory.
  * @param {object} file - Individual file to import and name,
  *
  * @returns {Array.<string|object>} - Imported fixture file.
  */
-export async function createFixtureMapping (path, file) {
+export async function createFixtureMapping (key, path, file) {
   const [name, ext] = file.match(/^[^.]+|[^.]+$/g)
   const imported = await importFixture(`${path}/${file}`, ext)
   const fixture = {
     data: imported.default,
     get model () {
-      return imported.model ?? this.data._model ?? {}
+      return imported.model ?? this.data[key] ?? {}
     }
   }
 

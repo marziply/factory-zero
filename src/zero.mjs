@@ -11,7 +11,10 @@ export const DEFAULT_OPTIONS = {
   pk: 'id',
   directory: './tests/fixtures',
   extensions: ['mjs', 'js', 'json'],
-  keys: {},
+  keys: {
+    options: '_options',
+    model: '_model'
+  },
   suffixes: {
     type: '_type',
     id: '_id'
