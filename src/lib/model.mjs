@@ -1,20 +1,20 @@
 import { v4 as uuid } from 'uuid'
 
-const now = new Date().toISOString()
+export const NOW = new Date().toISOString()
 
 export default class Model {
   constructor (options, table, data) {
+    Object.assign(this, data)
+
+    this[table.pk] = uuid()
+
     this.$options = {
       ...options,
       table
     }
-
-    Object.assign(this, data)
   }
 
-  id = uuid()
+  created_at = NOW
 
-  created_at = now
-
-  updated_at = now
+  updated_at = NOW
 }

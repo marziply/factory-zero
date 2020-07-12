@@ -6,19 +6,19 @@ export default class Fixture {
     this.data = data
   }
 
-  resolve (pk, resolveables, insertables) {
-    for (const [key, relations] of resolveables) {
-      const model = insertables.get(key)
+  resolve (relationMap, insertMap) {
+    for (const [key, relations] of relationMap) {
+      const model = insertMap.get(key)
 
-      this.set(pk, model, relations, insertables)
+      this.set(model, relations, insertMap)
     }
   }
 
-  set (pk, model, relations, insertables) {
+  set (model, relations, insertMap) {
     for (const [key, pointer] of Object.entries(relations)) {
-      const relation = insertables.get(pointer)
+      const relation = insertMap.get(pointer)
 
-      set(model, key, relation[pk])
+      set(model, key, relation[relation.$options.table.pk])
     }
   }
 }

@@ -8,7 +8,7 @@ import Resolver from './lib/resolver.mjs'
 const { assign, keys } = Object
 
 export const DEFAULT_OPTIONS = {
-  primaryKey: 'id',
+  pk: 'id',
   directory: './tests/fixtures',
   extensions: ['mjs', 'js', 'json'],
   suffixes: {
@@ -36,7 +36,7 @@ export default class Zero {
     const fixtures = await loadFixtures(this.options)
     const tablesInfo = await getTablesInfo(this.db, fixtures)
 
-    return assign(this.options, { fixtures, tablesInfo })
+    assign(this.options, { fixtures, tablesInfo })
   }
 
 
@@ -52,7 +52,8 @@ export default class Zero {
       const [nameSection] = path.split('.')
       const tableName = nameSection.slice(1)
 
-      return this.db(tableName).insert(toJson(fixture))
+      console.log(toJson(fixture))
+      // return this.db(tableName).insert(toJson(fixture))
     })
 
     return Promise.all(queries).then(() => log('Fixtures seeded'))

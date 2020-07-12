@@ -12,10 +12,10 @@ export default class Resolver {
   }
 
   relate () {
-    const { options, relationMap, insertMap } = this
+    const { relationMap, insertMap } = this
 
     for (const item of this.fixtureTables()) {
-      item.resolve(options.primaryKey, relationMap, insertMap)
+      item.resolve(relationMap, insertMap)
     }
 
     return this.insertMap
@@ -23,8 +23,8 @@ export default class Resolver {
 
   fixtureTables () {
     return entries(this.options.fixtures)
-      .flatMap(([tableName, data]) => {
-        const table = new Table(this.options, data, tableName)
+      .flatMap(([tableName, fixture]) => {
+        const table = new Table(this.options, tableName, fixture)
 
         return this.fixtureModels(table)
       })

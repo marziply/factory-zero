@@ -3,13 +3,11 @@ import defaults from 'lodash/defaults.js'
 import upperFirst from 'lodash/upperFirst.js'
 import Fixture from './fixture.mjs'
 
-const { entries } = Object
-
 export default class Table {
-  constructor ({ tablesInfo, ...options }, { model, data }, tableName) {
+  constructor (options, tableName, { model, data }) {
+    this.pk = model.pk ?? options.pk
     this.name = tableName
     this.data = data
-    this.columns = tablesInfo[tableName]
     this.options = options
     this.model = this.modelDefaults(model)
   }
@@ -21,7 +19,12 @@ export default class Table {
     })
   }
 
+  get columns () {
+    return this.options.tablesInfo[this.name]
+  }
+
   get fixtures () {
-    return entries(this.data).map(([name, data]) => new Fixture(name, data))
+    return Object.entries(this.data)
+      .map(([name, data]) => new Fixture(name, data))
   }
 }
