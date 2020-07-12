@@ -50,16 +50,20 @@ export default class Resolver {
   unresolvedRelations (model) {
     const relations = filterValues(model, v => v.toString().match(/^@[\w]+/g))
 
-    return this.polymorph(model, relations, model.$options.table)
+    return this.polymorph(model, relations)
   }
 
-  polymorph (model, relations, table) {
+  polymorph (model, relations) {
+    const { table } = model.$options
+
     for (const [key, value] of entries(relations)) {
       const polyType = key + this.options.suffixes.type
       const polyId = key + this.options.suffixes.id
 
       if (!table.columns[key] && table.columns[polyType] && table.columns[polyId]) {
-        model[polyType] = table.model.name
+        const [relatedTableName] = value.slice(1).split('.')
+
+        model[polyType] = this.options.fixtures[relatedTableName].model.name
 
         relations[polyId] = value
 

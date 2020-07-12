@@ -52,8 +52,7 @@ export default class Zero {
       const [nameSection] = path.split('.')
       const tableName = nameSection.slice(1)
 
-      console.log(toJson(fixture))
-      // return this.db(tableName).insert(toJson(fixture))
+      return this.db(tableName).insert(toJson(fixture))
     })
 
     return Promise.all(queries).then(() => log('Fixtures seeded'))
