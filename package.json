@@ -4,7 +4,8 @@
   "description": "Knex based fixtures seeding utility",
   "main": "index.mjs",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "docs:generate": "jsdoc2md -c .jsdoc.json **/*.mjs > DOCS.md"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,8 @@
     "eslint-plugin-jsdoc": "^24.0.6",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
+    "jsdoc": "^3.6.4",
+    "jsdoc-to-markdown": "^6.0.1",
     "pg": "^8.0.3"
   }
 }

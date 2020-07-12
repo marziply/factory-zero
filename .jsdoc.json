@@ -1,0 +1,12 @@
+{
+  "opts": {
+    "readme": "README.md",
+    "private": true,
+    "recurse": true
+  },
+  "source": {
+    "include": ["index.mjs"],
+    "includePattern": ".mjs$",
+    "excludePattern": "(node_modules/)"
+  }
+}
