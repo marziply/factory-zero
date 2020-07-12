@@ -43,6 +43,6 @@ export default class Resolver {
     const path = `@${table.name}.${fixture.name}`
 
     this.insertables.set(path, model)
-    this.resolveables.set(path, model.$relations(table, suffixes, fixture))
+    this.resolveables.set(path, model.$relations(table, suffixes, fixture.data))
   }
 }

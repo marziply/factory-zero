@@ -5,14 +5,14 @@ const { assign, entries } = Object
 const now = new Date().toISOString()
 
 export default class Model {
-  constructor (table, suffixes, fixture) {
-    const relations = this.$relations(table, suffixes, fixture)
+  constructor (table, suffixes, { data }) {
+    const relations = this.$relations(table, suffixes, data)
 
     this.$options = {
       table
     }
 
-    return assign(this, fixture.data, relations)
+    return assign(this, data, relations)
   }
 
   $polymorph (relations, { columns, model }, { type, id }) {
@@ -33,7 +33,7 @@ export default class Model {
     return relations
   }
 
-  $relations (table, suffixes, { data }) {
+  $relations (table, suffixes, data) {
     const relations = filterValues(data, v => v.toString().match(/^@[\w]+/g))
 
     return this.$polymorph(relations, table, suffixes)
