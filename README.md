@@ -96,6 +96,36 @@ All column values that begin with `@` are treated as references that are resolve
 
 Primary keys on models are auto generated as UUIDs so the values that are referenced don't need to be manually typed in an `id` for example.
 
+#### Polymorphism
+
+In addition to named associations like this, Factory Zero provides an even further convenience for those that use polymorphic relations. Some assumption are made when associating polymorphic relations here, but those assumptions are configurable. You can achieve polymorphic relations by defining a property in your fixture as the name of the column you want to relate minus the id/type with the value as a reference to the table you want to relate to, exactly like relations defined above.
+
+This is best explained with an example:
+
+##### /tests/fixtures/comments.mjs
+```javascript
+export const model = {
+  name: 'Comment'
+}
+
+export default {
+  first_comment: {
+    body: 'Aliquam tristique, ligula eu imperdiet lacinia, nibh neque cursus justo, non congue magna libero a enim.',
+    user_id: '@users.john',
+    parent: '@posts.first_post'
+  },
+  second_comment: {
+    body: 'Suspendisse feugiat mi ut libero ultrices, vel dapibus ex pellentesque.',
+    user_id: '@users.jane',
+    parent: '@videos.first_video'
+  }
+}
+```
+
+In this example, the assumption is that `parent` does **not** exist as a column on the `comments` table but `parent_type` **and** `parent_id` do. If those conditions are met, Factory Zero can attempt a polymorphic relation. The `type` column of this polymorphic relation is set to the name of the related model, which is defined on the `model` export on fixtures, as explained above.
+
+It's worth mentioning that while `name` is not a required option for each fixture, it's advised to define it if you make use of polymorphic relations as internally, if `name` is not defined, Factory Zero will attempt to singularise the name of the model from the fixture's file name. In theory, this shouldn't be much of an issue, but there's always nuances with plurality and singularity in the English language.
+
 ## Documentation
 
 The default export is the `Zero` class, but there is a named export called `seed` that instantiates Zero for you while accepting the same arguments. For most standard configurations, `seed` will suffice, unless you're interested in the other methods that Zero provides.
