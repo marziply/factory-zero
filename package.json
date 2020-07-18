@@ -4,7 +4,7 @@
   "description": "Knex based fixtures seeding utility",
   "main": "index.mjs",
   "scripts": {
-    "test": "jest",
+    "test": "node --no-warnings --experimental-vm-modules node_modules/jest/bin/jest.js",
     "docs:generate": "jsdoc2md -c .jsdoc.json ./**/*.mjs > DOCS.md"
   },
   "publishConfig": {
@@ -43,6 +43,7 @@
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "debug": "^4.1.1",
+    "dotenv": "^8.2.0",
     "eslint": "^6.8.0",
     "eslint-plugin-jsdoc": "^24.0.6",
     "husky": "^4.2.5",
