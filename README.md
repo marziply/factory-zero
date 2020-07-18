@@ -6,6 +6,8 @@ A [factory_bot](https://github.com/thoughtbot/factory_bot_rails) inspired fixtur
 
 **Node 14 or higher is required.**
 
+[Changelog](/CHANGELOG.md) | [Documentation](/DOCS.md) | [License](/LICENSE.md)
+
 ## Intro
 
 This is a seeding utility that uses [Knex](https://github.com/knex/knex) for the insert queries to keep this package lightweight but also usable by all major RDBMS. You don't necessarily have to maintain your own Knex instance for this to run if you use something like [Sequelize](https://github.com/sequelize/sequelize) - just provide a connection object instead, as you would with Knex.
