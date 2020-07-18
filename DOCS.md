@@ -115,8 +115,8 @@ found in the fixtures directory.</p>
 * [Loader](#module_Loader)
     * [.loadFixtures(options)](#module_Loader.loadFixtures) ⇒ <code>object</code>
     * [.getFixtureFiles(options)](#module_Loader.getFixtureFiles) ⇒ <code>object</code>
-    * [.mapFixtures(key, path, files)](#module_Loader.mapFixtures) ⇒ <code>object</code>
-    * [.createFixtureMapping(key, path, file)](#module_Loader.createFixtureMapping) ⇒ <code>Array.&lt;(string\|object)&gt;</code>
+    * [.mapFixtures(options, path, files)](#module_Loader.mapFixtures) ⇒ <code>object</code>
+    * [.createFixtureMapping(options, path, file)](#module_Loader.createFixtureMapping) ⇒ <code>Array.&lt;(string\|object)&gt;</code>
     * [.importFixture(path, ext)](#module_Loader.importFixture) ⇒ <code>Promise</code> \| <code>object</code>
 
 <a name="module_Loader.loadFixtures"></a>
@@ -146,7 +146,7 @@ Retrieves the fixture files from the configured directory.
 
 <a name="module_Loader.mapFixtures"></a>
 
-### Loader.mapFixtures(key, path, files) ⇒ <code>object</code>
+### Loader.mapFixtures(options, path, files) ⇒ <code>object</code>
 Maps fixture files into an object.
 
 **Kind**: static method of [<code>Loader</code>](#module_Loader)  
@@ -154,13 +154,13 @@ Maps fixture files into an object.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| key | <code>string</code> | Fixtures model key. |
+| options | <code>object</code> | Zero options. |
 | path | <code>string</code> | Directory path to the fixtures directory. |
 | files | <code>Array.&lt;object&gt;</code> | Retrieved fixture files. |
 
 <a name="module_Loader.createFixtureMapping"></a>
 
-### Loader.createFixtureMapping(key, path, file) ⇒ <code>Array.&lt;(string\|object)&gt;</code>
+### Loader.createFixtureMapping(options, path, file) ⇒ <code>Array.&lt;(string\|object)&gt;</code>
 Imports an individual fixture file.
 
 **Kind**: static method of [<code>Loader</code>](#module_Loader)  
@@ -168,7 +168,7 @@ Imports an individual fixture file.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| key | <code>string</code> | Fixtures model key. |
+| options | <code>object</code> | Zero options. |
 | path | <code>string</code> | Directory path to the fixtures directory. |
 | file | <code>object</code> | Individual file to import and name, |
 
