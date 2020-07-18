@@ -1,6 +1,8 @@
 ## Classes
 
 <dl>
+<dt><a href="#Resolver">Resolver</a></dt>
+<dd></dd>
 <dt><a href="#Zero">Zero</a></dt>
 <dd></dd>
 </dl>
@@ -8,6 +10,23 @@
 ## Functions
 
 <dl>
+<dt><a href="#seed">seed(knex, options)</a> ⇒ <code>Promise</code></dt>
+<dd></dd>
+<dt><a href="#fixtures">fixtures()</a> ⇒ <code>Map.&lt;string, object&gt;</code></dt>
+<dd><p>Resolves relations and returns a map of all insertable relations.</p>
+</dd>
+<dt><a href="#fixtureTables">fixtureTables()</a> ⇒ <code>Array.&lt;Fixture&gt;</code></dt>
+<dd><p>Fetches a new instance of Table for each fixture file.</p>
+</dd>
+<dt><a href="#fixtureModels">fixtureModels(table)</a> ⇒ <code>Array.&lt;Fixture&gt;</code></dt>
+<dd><p>Fetches a new instance of Model for each instance of Table.</p>
+</dd>
+<dt><a href="#relations">relations(model)</a> ⇒ <code>object</code></dt>
+<dd><p>Searches the given fixture model for possible relatable columns.</p>
+</dd>
+<dt><a href="#applyPolymorphism">applyPolymorphism(model, relations)</a> ⇒ <code>void</code></dt>
+<dd><p>Applies polymorphism to columns that can be polymorphically related.</p>
+</dd>
 <dt><a href="#loadFixtures">loadFixtures(options)</a> ⇒ <code>object</code></dt>
 <dd><p>Loads all fixture files into memory based on configuration defined
 in Zero&#39;s options.</p>
@@ -79,6 +98,16 @@ found in the fixtures directory.</p>
 </dd>
 </dl>
 
+<a name="Resolver"></a>
+
+## Resolver
+**Kind**: global class  
+<a name="new_Resolver_new"></a>
+
+### new Resolver()
+Fixture resolver for resolving table columns and configured relationships.
+This supports polymorphism which is configurable via [ZeroOptions].
+
 <a name="Zero"></a>
 
 ## Zero
@@ -87,6 +116,67 @@ found in the fixtures directory.</p>
 
 ### new Zero()
 Entry class instance for Factory Zero.
+
+<a name="seed"></a>
+
+## seed(knex, options) ⇒ <code>Promise</code>
+**Kind**: global function  
+**Returns**: <code>Promise</code> - - Resolved query.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| knex | <code>Knex</code> \| <code>object</code> | Knex instance or a knex connection object. |
+| options | [<code>ZeroOptions</code>](#ZeroOptions) | Factory Zero options. |
+
+<a name="fixtures"></a>
+
+## fixtures() ⇒ <code>Map.&lt;string, object&gt;</code>
+Resolves relations and returns a map of all insertable relations.
+
+**Kind**: global function  
+**Returns**: <code>Map.&lt;string, object&gt;</code> - - All fixtures with relations resolved.  
+<a name="fixtureTables"></a>
+
+## fixtureTables() ⇒ <code>Array.&lt;Fixture&gt;</code>
+Fetches a new instance of Table for each fixture file.
+
+**Kind**: global function  
+**Returns**: <code>Array.&lt;Fixture&gt;</code> - - Unresolved instances of Fixture.  
+<a name="fixtureModels"></a>
+
+## fixtureModels(table) ⇒ <code>Array.&lt;Fixture&gt;</code>
+Fetches a new instance of Model for each instance of Table.
+
+**Kind**: global function  
+**Returns**: <code>Array.&lt;Fixture&gt;</code> - - Unresolved instances of Fixture.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| table | <code>Table</code> | Table instance to resolve relations against. |
+
+<a name="relations"></a>
+
+## relations(model) ⇒ <code>object</code>
+Searches the given fixture model for possible relatable columns.
+
+**Kind**: global function  
+**Returns**: <code>object</code> - - Collection of relations to resolve later.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| model | <code>Model</code> | Model instance to search for relations on. |
+
+<a name="applyPolymorphism"></a>
+
+## applyPolymorphism(model, relations) ⇒ <code>void</code>
+Applies polymorphism to columns that can be polymorphically related.
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| model | <code>Model</code> | Model instance to search for polymorphic relations on. |
+| relations | <code>object</code> | Collection of relations to check for polymorphism on. |
 
 <a name="loadFixtures"></a>
 
