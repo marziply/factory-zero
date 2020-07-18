@@ -24,6 +24,7 @@ export const DEFAULT_OPTIONS = {
   pk: 'id',
   directory: './tests/fixtures',
   extensions: ['mjs', 'js', 'json'],
+  snaked: true,
   keys: {
     options: '_options',
     model: '_model'

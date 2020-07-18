@@ -1,5 +1,6 @@
 /** @module Loader */
 
+import snakeCase from 'lodash/snakeCase.js'
 import { join, dirname } from 'path'
 import { readdirSync } from 'fs'
 import { createRequire } from 'module'
@@ -20,7 +21,7 @@ const root = dirname(process.argv[1])
 export function loadFixtures (options) {
   const { path, files } = getFixtureFiles(options)
 
-  return mapFixtures(options.keys.model, path, files)
+  return mapFixtures(options, path, files)
 }
 
 /**
@@ -41,14 +42,14 @@ export function getFixtureFiles ({ directory, extensions }) {
 /**
  * Maps fixture files into an object.
  *
- * @param {string} key - Fixtures model key.
+ * @param {object} options - Zero options.
  * @param {string} path - Directory path to the fixtures directory.
  * @param {Array.<object>} files - Retrieved fixture files.
  *
  * @returns {object} - Mapped fixtures into an object.
  */
-export async function mapFixtures (key, path, files) {
-  const mappedFiles = files.map(createFixtureMapping.bind(null, key, path))
+export async function mapFixtures (options, path, files) {
+  const mappedFiles = files.map(createFixtureMapping.bind(null, options, path))
   const fixtures = await Promise.all(mappedFiles)
 
   log('Imported fixture files from ' + path)
@@ -59,23 +60,23 @@ export async function mapFixtures (key, path, files) {
 /**
  * Imports an individual fixture file.
  *
- * @param {string} key - Fixtures model key.
+ * @param {object} options - Zero options.
  * @param {string} path - Directory path to the fixtures directory.
  * @param {object} file - Individual file to import and name,
  *
  * @returns {Array.<string|object>} - Imported fixture file.
  */
-export async function createFixtureMapping (key, path, file) {
+export async function createFixtureMapping ({ snaked, keys }, path, file) {
   const [name, ext] = file.match(/^[^.]+|[^.]+$/g)
   const imported = await importFixture(`${path}/${file}`, ext)
   const fixture = {
     data: imported.default,
     get model () {
-      return imported.model ?? this.data[key] ?? {}
+      return imported.model ?? this.data[keys.model] ?? {}
     }
   }
 
-  return [name, fixture]
+  return [snaked ? snakeCase(name) : name, fixture]
 }
 
 /**
