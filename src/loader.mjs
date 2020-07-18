@@ -1,3 +1,5 @@
+/** @module Loader */
+
 import { join, dirname } from 'path'
 import { readdirSync } from 'fs'
 import { createRequire } from 'module'

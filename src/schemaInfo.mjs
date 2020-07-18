@@ -1,3 +1,5 @@
+/** @module SchemaInfo */
+
 import mapKeys from 'lodash/mapKeys.js'
 import pick from 'lodash/pick.js'
 import camelCase from 'lodash/camelCase.js'
