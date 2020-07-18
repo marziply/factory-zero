@@ -45,16 +45,35 @@ export const schema = () => Promise.all([
     table.string('email', 2048)
     table.datetime('created_at')
     table.datetime('updated_at')
+  }),
+  db.schema.createTable('submissions', table => {
+    table.uuid('id').primary()
+    table.uuid('user_id')
+    table.string('submission_type', 32)
+    table.uuid('submission_id')
+  }),
+  db.schema.createTable('pull_requests', table => {
+    table.uuid('id').primary()
+    table.string('title', 512)
+    table.text('description')
+    table.jsonb('labels')
+  }),
+  db.schema.createTable('issues', table => {
+    table.uuid('id').primary()
+    table.string('title', 512)
+    table.text('description')
+    table.jsonb('labels')
   })
 ])
 
 export const setup = () => {
-  clear()
+  return clear()
     .then(schema)
-    .then(() => db.destroy())
     .catch(console.error)
 }
 
 const [, path] = process.argv
 
-if (path === import.meta.url.slice(7)) setup()
+if (path === import.meta.url.slice(7)) {
+  setup().then(() => db.destroy())
+}
