@@ -27,7 +27,7 @@ export default class Zero {
     this.options = defaults(options, DEFAULT_OPTIONS)
   }
 
-  async seed () {
+  seed () {
     return this.setup()
       .then(() => this.clear())
       .then(() => this.relate())
@@ -40,18 +40,21 @@ export default class Zero {
     const fixtures = await loadFixtures(this.options)
     const tablesInfo = await getTablesInfo(this.db, fixtures)
 
-    assign(this.options, { fixtures, tablesInfo })
+    assign(this.options, {
+      fixtures,
+      tablesInfo
+    })
   }
 
 
-  async clear () {
+  clear () {
     const tableNames = keys(this.options.tablesInfo)
     const queries = tableNames.map(tableName => this.db(tableName).del())
 
     return Promise.all(queries).then(() => log('Tables cleared'))
   }
 
-  async insert (fixtures) {
+  insert (fixtures) {
     const queries = Array.from(fixtures).map(([path, fixture]) => {
       const [nameSection] = path.split('.')
       const tableName = nameSection.slice(1)
