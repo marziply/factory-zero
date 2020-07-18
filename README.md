@@ -51,7 +51,7 @@ It's highly recommended to use `mjs` as this will enable utilisation of more fun
 
 When `mjs` is used, per model configuration can be defined as an individual export named `model` with the fixture data as the `default` export. You can see examples of this format [here](/tests/fixtures) or you can see below.
 
-`/tests/fixtures/posts.mjs`
+##### /tests/fixtures/posts.mjs
 ```javascript
 export const model = {
   name: 'Post'
@@ -71,7 +71,7 @@ export default {
 
 When `json` is used, or any other file type that doesn't allow JavaScript exports, you must configure your model via a `_model` property as shown below. The property key you have to use here is configurable.
 
-`/tests/fixtures/posts.json`
+##### /tests/fixtures/posts.json
 ```json
 {
   "_model": {
