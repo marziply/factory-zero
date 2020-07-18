@@ -34,7 +34,7 @@
   "bugs": {
     "url": "https://github.com/bakewellcake/factory-zero/issues"
   },
-  "homepage": "https://github.com/bakewellcake/factory-zero#readme",
+  "homepage": "https://bakewellcake.github.io/factory-zero",
   "dependencies": {
     "knex": "^0.21.1",
     "lodash": "^4.17.19",
