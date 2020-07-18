@@ -1,3 +1,10 @@
+## Classes
+
+<dl>
+<dt><a href="#Zero">Zero</a></dt>
+<dd></dd>
+</dl>
+
 ## Functions
 
 <dl>
@@ -36,6 +43,30 @@ in Zero&#39;s options.</p>
 <dd></dd>
 <dt><a href="#filterValues">filterValues(object, predicate)</a> ⇒ <code>object</code></dt>
 <dd></dd>
+<dt><a href="#seed">seed()</a> ⇒ <code>Promise</code></dt>
+<dd><p>Seeding method that runs all the necessary queries to seed all available fixtures
+into the configured database.</p>
+</dd>
+<dt><a href="#setup">setup()</a> ⇒ <code>void</code></dt>
+<dd><p>Sets up Factory Zero for seeding by loading fixtures and fetching schema
+information via information_schema.</p>
+</dd>
+<dt><a href="#clear">clear()</a> ⇒ <code>Promise</code></dt>
+<dd><p>Clears data from all tables found in the fixtures directory.</p>
+</dd>
+<dt><a href="#insert">insert(fixtures)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Insert all fixtures into the configured database with all fixtures
+found in the fixtures directory.</p>
+</dd>
+<dt><a href="#fixtures">fixtures()</a> ⇒ <code>Map.&lt;string, object&gt;</code></dt>
+<dd><p>Fetches all fixtures with all relations resolved via lib/Resolver.</p>
+</dd>
+<dt><a href="#createKnex">createKnex(kx)</a> ⇒ <code>Knex</code></dt>
+<dd><p>Creates an individual Knex database instance.</p>
+</dd>
+<dt><a href="#isKnex">isKnex(kx)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Checks if [kx] is an instance of Knex.</p>
+</dd>
 <dt><a href="#seed">seed(knex, options)</a> ⇒ <code>Promise</code></dt>
 <dd></dd>
 </dl>
@@ -47,6 +78,15 @@ in Zero&#39;s options.</p>
 <dd><p>Factory Zero options schema.</p>
 </dd>
 </dl>
+
+<a name="Zero"></a>
+
+## Zero
+**Kind**: global class  
+<a name="new_Zero_new"></a>
+
+### new Zero()
+Entry class instance for Factory Zero.
 
 <a name="loadFixtures"></a>
 
@@ -197,6 +237,72 @@ Clones an object, including getters/setters and class prototypes.
 | --- | --- | --- |
 | object | <code>object</code> | Object data to filter over. |
 | predicate | <code>function</code> | Test function. |
+
+<a name="seed"></a>
+
+## seed() ⇒ <code>Promise</code>
+Seeding method that runs all the necessary queries to seed all available fixtures
+into the configured database.
+
+**Kind**: global function  
+**Returns**: <code>Promise</code> - - A chained Promise instance of all queries on this instance.  
+<a name="setup"></a>
+
+## setup() ⇒ <code>void</code>
+Sets up Factory Zero for seeding by loading fixtures and fetching schema
+information via information_schema.
+
+**Kind**: global function  
+<a name="clear"></a>
+
+## clear() ⇒ <code>Promise</code>
+Clears data from all tables found in the fixtures directory.
+
+**Kind**: global function  
+**Returns**: <code>Promise</code> - - A collection of all DELETE queries.  
+<a name="insert"></a>
+
+## insert(fixtures) ⇒ <code>Promise</code>
+Insert all fixtures into the configured database with all fixtures
+found in the fixtures directory.
+
+**Kind**: global function  
+**Returns**: <code>Promise</code> - - A collection of all INSERT queries.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| fixtures | <code>Map.&lt;string, object&gt;</code> | All fixtures to insert into the database. |
+
+<a name="fixtures"></a>
+
+## fixtures() ⇒ <code>Map.&lt;string, object&gt;</code>
+Fetches all fixtures with all relations resolved via lib/Resolver.
+
+**Kind**: global function  
+**Returns**: <code>Map.&lt;string, object&gt;</code> - - A collection of all fixtures ready to insert.  
+<a name="createKnex"></a>
+
+## createKnex(kx) ⇒ <code>Knex</code>
+Creates an individual Knex database instance.
+
+**Kind**: global function  
+**Returns**: <code>Knex</code> - - Knex database instance.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| kx | <code>object</code> \| <code>Knex</code> | Knex connection instance. |
+
+<a name="isKnex"></a>
+
+## isKnex(kx) ⇒ <code>boolean</code>
+Checks if [kx] is an instance of Knex.
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - - Is [kx] an instance of Knex?  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| kx | <code>any</code> | Any value that might be an instance of Knex. |
 
 <a name="seed"></a>
 
