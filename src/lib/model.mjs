@@ -2,7 +2,19 @@ import { v4 as uuid } from 'uuid'
 
 export const NOW = new Date().toISOString()
 
+/**
+ * An instance of a single model which represents an instance
+ * of a Fixture, which in turn represents a record in the
+ * database.
+ *
+ * @class Model
+ */
 export default class Model {
+  /**
+   * @param {ZeroOptions} options - Configuration for Factory Zero.
+   * @param {Table} table - Table instance defined for this Model.
+   * @param {object} data - Data object to bind to this instance.
+   */
   constructor (options, table, data) {
     Object.assign(this, data)
 
