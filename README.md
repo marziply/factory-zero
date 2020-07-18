@@ -98,7 +98,7 @@ Primary keys on models are auto generated as UUIDs so the values that are refere
 
 #### Polymorphism
 
-In addition to named associations like this, Factory Zero provides an even further convenience for those that use polymorphic relations. Some assumption are made when associating polymorphic relations here, but those assumptions are configurable. You can achieve polymorphic relations by defining a property in your fixture as the name of the column you want to relate minus the id/type with the value as a reference to the table you want to relate to, exactly like relations defined above.
+In addition to named associations like this, Factory Zero provides an even further convenience for those that use polymorphic relations. Some assumptions are made when associating polymorphic relations here, but those assumptions are configurable. You can achieve polymorphic relations by defining a property on your fixture as the name of the column you want to relate minus the `<column>_id`/`<column>_type` with the value as a reference to the table you want to relate to, exactly like relations defined above.
 
 This is best explained with an example:
 
@@ -122,9 +122,9 @@ export default {
 }
 ```
 
-In this example, the assumption is that `parent` does **not** exist as a column on the `comments` table but `parent_type` **and** `parent_id` do. If those conditions are met, Factory Zero can attempt a polymorphic relation. The `type` column of this polymorphic relation is set to the name of the related model, which is defined on the `model` export on fixtures, as explained above.
+In this example, the assumption is that `parent` does **not** exist as a column on the `comments` table but `parent_type` **and** `parent_id` do. If those conditions are met, Factory Zero can attempt a polymorphic relation. The `<column>_type` column of this polymorphic relation is set to the name of the related model, which is defined on the `model` export on fixtures, as explained above.
 
-It's worth mentioning that while `name` is not a required option for each fixture, it's advised to define it if you make use of polymorphic relations as internally, if `name` is not defined, Factory Zero will attempt to singularise the name of the model from the fixture's file name. In theory, this shouldn't be much of an issue, but there's always nuances with plurality and singularity in the English language.
+It's worth mentioning that while `name` is not a required option for each fixture, it's advised to define it if you make use of polymorphic relations as internally, if `name` is not defined, Factory Zero will attempt to singularise the name of the model from the fixture's file name. In theory, this shouldn't be much of an issue, but there's always nuances with plurality and singularity in the English language that might cause issues.
 
 ## Documentation
 
