@@ -11,7 +11,7 @@ export default class Resolver {
     this.relationMap = new Map()
   }
 
-  relate () {
+  fixtures () {
     const { relationMap, insertMap } = this
 
     for (const item of this.fixtureTables()) {
