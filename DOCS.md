@@ -1,10 +1,27 @@
 ## Classes
 
 <dl>
+<dt><a href="#Fixture">Fixture</a></dt>
+<dd></dd>
+<dt><a href="#Model">Model</a></dt>
+<dd></dd>
 <dt><a href="#Resolver">Resolver</a></dt>
+<dd></dd>
+<dt><a href="#Table">Table</a></dt>
 <dd></dd>
 <dt><a href="#Zero">Zero</a></dt>
 <dd></dd>
+</dl>
+
+## Members
+
+<dl>
+<dt><a href="#columns">columns</a> ⇒ <code>object</code></dt>
+<dd><p>All columns defined on the database table this instance refers to.</p>
+</dd>
+<dt><a href="#fixtures">fixtures</a> ⇒ <code><a href="#Fixture">Array.&lt;Fixture&gt;</a></code></dt>
+<dd><p>A collection of Fixture instances relating to this table instance.</p>
+</dd>
 </dl>
 
 ## Functions
@@ -12,13 +29,19 @@
 <dl>
 <dt><a href="#seed">seed(knex, options)</a> ⇒ <code>Promise</code></dt>
 <dd></dd>
+<dt><a href="#resolve">resolve(relationMap, insertMap)</a> ⇒ <code>void</code></dt>
+<dd><p>Resolves all the relations on the fixture.</p>
+</dd>
+<dt><a href="#set">set(model, relations, insertMap)</a> ⇒ <code>void</code></dt>
+<dd><p>Sets data onto the related columns.</p>
+</dd>
 <dt><a href="#fixtures">fixtures()</a> ⇒ <code>Map.&lt;string, object&gt;</code></dt>
 <dd><p>Resolves relations and returns a map of all insertable relations.</p>
 </dd>
-<dt><a href="#fixtureTables">fixtureTables()</a> ⇒ <code>Array.&lt;Fixture&gt;</code></dt>
+<dt><a href="#fixtureTables">fixtureTables()</a> ⇒ <code><a href="#Fixture">Array.&lt;Fixture&gt;</a></code></dt>
 <dd><p>Fetches a new instance of Table for each fixture file.</p>
 </dd>
-<dt><a href="#fixtureModels">fixtureModels(table)</a> ⇒ <code>Array.&lt;Fixture&gt;</code></dt>
+<dt><a href="#fixtureModels">fixtureModels(table)</a> ⇒ <code><a href="#Fixture">Array.&lt;Fixture&gt;</a></code></dt>
 <dd><p>Fetches a new instance of Model for each instance of Table.</p>
 </dd>
 <dt><a href="#relations">relations(model)</a> ⇒ <code>object</code></dt>
@@ -26,6 +49,9 @@
 </dd>
 <dt><a href="#applyPolymorphism">applyPolymorphism(model, relations)</a> ⇒ <code>void</code></dt>
 <dd><p>Applies polymorphism to columns that can be polymorphically related.</p>
+</dd>
+<dt><a href="#modelDefaults">modelDefaults(model)</a> ⇒ <code>object</code></dt>
+<dd><p>Creates an options object with default values.</p>
 </dd>
 <dt><a href="#loadFixtures">loadFixtures(options)</a> ⇒ <code>object</code></dt>
 <dd><p>Loads all fixture files into memory based on configuration defined
@@ -98,6 +124,27 @@ found in the fixtures directory.</p>
 </dd>
 </dl>
 
+<a name="Fixture"></a>
+
+## Fixture
+**Kind**: global class  
+<a name="new_Fixture_new"></a>
+
+### new Fixture()
+An instance of a single fixture which represents a single
+database record.
+
+<a name="Model"></a>
+
+## Model
+**Kind**: global class  
+<a name="new_Model_new"></a>
+
+### new Model()
+An instance of a single model which represents an instance
+of a Fixture, which in turn represents a record in the
+database.
+
 <a name="Resolver"></a>
 
 ## Resolver
@@ -108,6 +155,15 @@ found in the fixtures directory.</p>
 Fixture resolver for resolving table columns and configured relationships.
 This supports polymorphism which is configurable via [ZeroOptions].
 
+<a name="Table"></a>
+
+## Table
+**Kind**: global class  
+<a name="new_Table_new"></a>
+
+### new Table()
+An instance of an individual database table.
+
 <a name="Zero"></a>
 
 ## Zero
@@ -117,6 +173,20 @@ This supports polymorphism which is configurable via [ZeroOptions].
 ### new Zero()
 Entry class instance for Factory Zero.
 
+<a name="columns"></a>
+
+## columns ⇒ <code>object</code>
+All columns defined on the database table this instance refers to.
+
+**Kind**: global variable  
+**Returns**: <code>object</code> - - Database columns.  
+<a name="fixtures"></a>
+
+## fixtures ⇒ [<code>Array.&lt;Fixture&gt;</code>](#Fixture)
+A collection of Fixture instances relating to this table instance.
+
+**Kind**: global variable  
+**Returns**: [<code>Array.&lt;Fixture&gt;</code>](#Fixture) - - Collection of Fixture instances.  
 <a name="seed"></a>
 
 ## seed(knex, options) ⇒ <code>Promise</code>
@@ -128,6 +198,31 @@ Entry class instance for Factory Zero.
 | knex | <code>Knex</code> \| <code>object</code> | Knex instance or a knex connection object. |
 | options | [<code>ZeroOptions</code>](#ZeroOptions) | Factory Zero options. |
 
+<a name="resolve"></a>
+
+## resolve(relationMap, insertMap) ⇒ <code>void</code>
+Resolves all the relations on the fixture.
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| relationMap | <code>Map.&lt;string, object&gt;</code> | Collection of all unresolved relations. |
+| insertMap | <code>Map.&lt;string, object&gt;</code> | Collection of all insertable fixtures. |
+
+<a name="set"></a>
+
+## set(model, relations, insertMap) ⇒ <code>void</code>
+Sets data onto the related columns.
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| model | [<code>Model</code>](#Model) | Instance of the current model. |
+| relations | <code>object</code> | Collection of relations to resolve. |
+| insertMap | <code>Map.&lt;string, object&gt;</code> | Collection of all insertable fixtures. |
+
 <a name="fixtures"></a>
 
 ## fixtures() ⇒ <code>Map.&lt;string, object&gt;</code>
@@ -137,22 +232,22 @@ Resolves relations and returns a map of all insertable relations.
 **Returns**: <code>Map.&lt;string, object&gt;</code> - - All fixtures with relations resolved.  
 <a name="fixtureTables"></a>
 
-## fixtureTables() ⇒ <code>Array.&lt;Fixture&gt;</code>
+## fixtureTables() ⇒ [<code>Array.&lt;Fixture&gt;</code>](#Fixture)
 Fetches a new instance of Table for each fixture file.
 
 **Kind**: global function  
-**Returns**: <code>Array.&lt;Fixture&gt;</code> - - Unresolved instances of Fixture.  
+**Returns**: [<code>Array.&lt;Fixture&gt;</code>](#Fixture) - - Unresolved instances of Fixture.  
 <a name="fixtureModels"></a>
 
-## fixtureModels(table) ⇒ <code>Array.&lt;Fixture&gt;</code>
+## fixtureModels(table) ⇒ [<code>Array.&lt;Fixture&gt;</code>](#Fixture)
 Fetches a new instance of Model for each instance of Table.
 
 **Kind**: global function  
-**Returns**: <code>Array.&lt;Fixture&gt;</code> - - Unresolved instances of Fixture.  
+**Returns**: [<code>Array.&lt;Fixture&gt;</code>](#Fixture) - - Unresolved instances of Fixture.  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| table | <code>Table</code> | Table instance to resolve relations against. |
+| table | [<code>Table</code>](#Table) | Table instance to resolve relations against. |
 
 <a name="relations"></a>
 
@@ -164,7 +259,7 @@ Searches the given fixture model for possible relatable columns.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| model | <code>Model</code> | Model instance to search for relations on. |
+| model | [<code>Model</code>](#Model) | Model instance to search for relations on. |
 
 <a name="applyPolymorphism"></a>
 
@@ -175,8 +270,20 @@ Applies polymorphism to columns that can be polymorphically related.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| model | <code>Model</code> | Model instance to search for polymorphic relations on. |
+| model | [<code>Model</code>](#Model) | Model instance to search for polymorphic relations on. |
 | relations | <code>object</code> | Collection of relations to check for polymorphism on. |
+
+<a name="modelDefaults"></a>
+
+## modelDefaults(model) ⇒ <code>object</code>
+Creates an options object with default values.
+
+**Kind**: global function  
+**Returns**: <code>object</code> - - Defaulted options.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| model | [<code>Model</code>](#Model) | Model instance to build the options against. |
 
 <a name="loadFixtures"></a>
 
@@ -292,7 +399,7 @@ Converts a Model instance to a plain object.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| instance | <code>Model</code> | Instance of a Model. |
+| instance | [<code>Model</code>](#Model) | Instance of a Model. |
 
 <a name="clone"></a>
 
