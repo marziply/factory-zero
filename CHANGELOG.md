@@ -1,5 +1,9 @@
 # Changelog
 
+## 2020-07-20 0.1.1
+
+- Fix for broken uuid import for jest.
+
 ## 2020-07-18 0.1.0
 
 - Added JSDocs to all applicable areas.
