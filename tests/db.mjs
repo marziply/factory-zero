@@ -1,5 +1,4 @@
 import knex from 'knex'
-import 'dotenv/config.js'
 
 const { DATABASE_URL, DATABASE_CLIENT } = process.env
 

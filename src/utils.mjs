@@ -1,6 +1,7 @@
 import isPlainObject from 'lodash/isPlainObject.js'
 import isArray from 'lodash/isArray.js'
 import debug from 'debug'
+import * as uuidLib from 'uuid'
 
 const {
   keys,
@@ -79,3 +80,5 @@ export function filterValues (object, predicate) {
 
   return objectClone
 }
+
+export const uuid = uuidLib.default?.v4 ?? uuidLib.v4
