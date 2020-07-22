@@ -101,7 +101,7 @@ export default class Zero {
    *
    * @returns {Promise} - A collection of all INSERT queries.
    */
-  insert (fixtures) {
+  async insert (fixtures) {
     const queries = Array.from(fixtures).map(([path, fixture]) => {
       const [nameSection] = path.split('.')
       const tableName = nameSection.slice(1)
@@ -109,7 +109,11 @@ export default class Zero {
       return this.db(tableName).insert(toJson(fixture))
     })
 
-    return Promise.all(queries).then(() => log('Fixtures seeded'))
+    await Promise.all(queries)
+
+    log('Fixtures seeded')
+
+    return fixtures
   }
 
   /**
