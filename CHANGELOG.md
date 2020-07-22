@@ -1,5 +1,9 @@
 # Changelog
 
+## 2020-07-22 0.1.2
+
+- Instances of Zero now returns the generate fixtures.
+
 ## 2020-07-20 0.1.1
 
 - Fix for broken uuid import for jest.
