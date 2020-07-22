@@ -2,7 +2,7 @@
 
 ## 2020-07-22 0.1.2
 
-- Instances of Zero now return the generate fixtures.
+- Instances of Zero now return the generated fixtures.
 
 ## 2020-07-20 0.1.1
 
