@@ -1,5 +1,9 @@
 # Changelog
 
+## 2020-07-25 0.2.0
+
+- Directory is now a required option. Zero no longer makes any assumptions on the path itself.
+
 ## 2020-07-22 0.1.2
 
 - Instances of Zero now return the generated fixtures.
