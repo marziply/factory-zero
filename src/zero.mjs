@@ -22,7 +22,6 @@ const { assign, keys } = Object
 
 export const DEFAULT_OPTIONS = {
   pk: 'id',
-  directory: './tests/fixtures',
   extensions: ['mjs', 'js', 'json'],
   snaked: true,
   keys: {
@@ -48,6 +47,10 @@ export default class Zero {
   constructor (connection, options = {}) {
     this.db = this.createKnex(connection)
     this.options = defaults(options, DEFAULT_OPTIONS)
+
+    if (!options.directory) {
+      throw new Error('Directory is a required option')
+    }
   }
 
   /**
