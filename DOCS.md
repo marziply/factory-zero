@@ -114,9 +114,9 @@ found in the fixtures directory.</p>
 
 * [Loader](#module_Loader)
     * [.loadFixtures(options)](#module_Loader.loadFixtures) ⇒ <code>object</code>
-    * [.getFixtureFiles(options)](#module_Loader.getFixtureFiles) ⇒ <code>object</code>
-    * [.mapFixtures(options, path, files)](#module_Loader.mapFixtures) ⇒ <code>object</code>
-    * [.createFixtureMapping(options, path, file)](#module_Loader.createFixtureMapping) ⇒ <code>Array.&lt;(string\|object)&gt;</code>
+    * [.getFixtureFiles(options)](#module_Loader.getFixtureFiles) ⇒ <code>Array.&lt;string&gt;</code>
+    * [.mapFixtures(options, files)](#module_Loader.mapFixtures) ⇒ <code>object</code>
+    * [.createFixtureMapping(options, file)](#module_Loader.createFixtureMapping) ⇒ <code>Array.&lt;(string\|object)&gt;</code>
     * [.importFixture(path, ext)](#module_Loader.importFixture) ⇒ <code>Promise</code> \| <code>object</code>
 
 <a name="module_Loader.loadFixtures"></a>
@@ -134,11 +134,11 @@ in Zero's options.
 
 <a name="module_Loader.getFixtureFiles"></a>
 
-### Loader.getFixtureFiles(options) ⇒ <code>object</code>
-Retrieves the fixture files from the configured directory.
+### Loader.getFixtureFiles(options) ⇒ <code>Array.&lt;string&gt;</code>
+Retrieves the fixture file names from the configured directory.
 
 **Kind**: static method of [<code>Loader</code>](#module_Loader)  
-**Returns**: <code>object</code> - - Path to fixtures and the fixture files themselves.  
+**Returns**: <code>Array.&lt;string&gt;</code> - - Collection of fixture file names.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -146,7 +146,7 @@ Retrieves the fixture files from the configured directory.
 
 <a name="module_Loader.mapFixtures"></a>
 
-### Loader.mapFixtures(options, path, files) ⇒ <code>object</code>
+### Loader.mapFixtures(options, files) ⇒ <code>object</code>
 Maps fixture files into an object.
 
 **Kind**: static method of [<code>Loader</code>](#module_Loader)  
@@ -155,12 +155,11 @@ Maps fixture files into an object.
 | Param | Type | Description |
 | --- | --- | --- |
 | options | <code>object</code> | Zero options. |
-| path | <code>string</code> | Directory path to the fixtures directory. |
 | files | <code>Array.&lt;object&gt;</code> | Retrieved fixture files. |
 
 <a name="module_Loader.createFixtureMapping"></a>
 
-### Loader.createFixtureMapping(options, path, file) ⇒ <code>Array.&lt;(string\|object)&gt;</code>
+### Loader.createFixtureMapping(options, file) ⇒ <code>Array.&lt;(string\|object)&gt;</code>
 Imports an individual fixture file.
 
 **Kind**: static method of [<code>Loader</code>](#module_Loader)  
@@ -169,7 +168,6 @@ Imports an individual fixture file.
 | Param | Type | Description |
 | --- | --- | --- |
 | options | <code>object</code> | Zero options. |
-| path | <code>string</code> | Directory path to the fixtures directory. |
 | file | <code>object</code> | Individual file to import and name, |
 
 <a name="module_Loader.importFixture"></a>
