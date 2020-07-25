@@ -1,0 +1,13 @@
+{
+  "opts": {
+    "template": "node_modules/tsd-jsdoc/dist",
+    "destination": ".",
+    "private": true,
+    "recurse": true
+  },
+  "source": {
+    "include": ["src"],
+    "includePattern": ".mjs$",
+    "excludePattern": "(node_modules/|docs/)"
+  }
+}

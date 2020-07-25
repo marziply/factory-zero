@@ -7,7 +7,7 @@
     "test": "node --no-warnings --experimental-vm-modules node_modules/jest/bin/jest.js",
     "db:seed": "node ./tests/seed.mjs",
     "db:setup": "node ./tests/setup.mjs",
-    "docs:generate": "jsdoc2md -c .jsdoc.json './**/*.mjs' > DOCS.md"
+    "docs:generate": "jsdoc2md -c .jsdoc.json './**/*.mjs' > DOCS.md && jsdoc -c .jsdoc.t.json"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
@@ -52,6 +52,7 @@
     "jest": "^26.0.1",
     "jsdoc": "^3.6.4",
     "jsdoc-to-markdown": "^6.0.1",
-    "pg": "^8.0.3"
+    "pg": "^8.0.3",
+    "tsd-jsdoc": "^2.5.0"
   }
 }
