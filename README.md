@@ -25,13 +25,14 @@ Setting up fixtures with this utility is reasonably straight forward although th
 Running Zero can be as simple as:
 
 ```javascript
+import { resolve } from 'path'
 import { seed } from 'factory-zero'
 
 seed({
   client: 'pg',
   connection: '...'
 }, {
-  directory: './fixtures'
+  directory: resolve('./fixtures')
 })
 ```
 
