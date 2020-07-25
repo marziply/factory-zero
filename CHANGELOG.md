@@ -1,5 +1,9 @@
 # Changelog
 
+## 2020-07-25 0.3.1
+
+- Added missing typings field in package.json.
+
 ## 2020-07-25 0.3.0
 
 - Added typings.
