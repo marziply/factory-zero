@@ -1,5 +1,9 @@
 # Changelog
 
+## 2020-08-03 0.3.2
+
+- Possible fix for undefined bug in Resolver module.
+
 ## 2020-07-25 0.3.1
 
 - Added missing typings field in package.json.
