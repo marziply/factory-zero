@@ -32,7 +32,7 @@ export default class Table {
   modelDefaults (model) {
     return defaults(model, {
       name: upperFirst(pluralize.singular(this.name)),
-      primaryKey: this.options.primaryKey
+      pk: this.pk
     })
   }
 

@@ -1,3 +1,4 @@
+import omit from 'lodash/omit.js'
 import { filterValues } from '../utils.mjs'
 import Model from './model.mjs'
 import Table from './table.mjs'
@@ -76,7 +77,8 @@ export default class Resolver {
    * @returns {object} - Collection of relations to resolve later.
    */
   relations (model) {
-    const relations = filterValues(model, v => v.toString().match(/^@[\w]+/g))
+    const json = omit(model, [this.options.keys.options])
+    const relations = filterValues(json, v => v?.toString().match(/^@[\w]+/g))
 
     this.applyPolymorphism(model, relations)
 
