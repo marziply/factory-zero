@@ -38,6 +38,7 @@ export default class Fixture {
    * @param {Model} model - Instance of the current model.
    * @param {object} relations - Collection of relations to resolve.
    * @param {Map.<string,object>} insertMap - Collection of all insertable fixtures.
+   *
    * @returns {void}
    */
   set (model, relations, insertMap) {

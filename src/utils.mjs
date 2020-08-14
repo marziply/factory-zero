@@ -14,6 +14,8 @@ const {
 
 export const log = debug('zero')
 
+export const uuid = uuidLib.default?.v4 ?? uuidLib.v4
+
 /**
  * Converts a Model instance to a plain object.
  *
@@ -80,5 +82,3 @@ export function filterValues (object, predicate) {
 
   return objectClone
 }
-
-export const uuid = uuidLib.default?.v4 ?? uuidLib.v4

@@ -7,7 +7,9 @@ import Resolver from './lib/resolver.mjs'
 
 /**
  * @typedef {object} ZeroOptions - Factory Zero options schema.
- * @property {string} pk - Default primary key for all models.
+ * @property {string|object} pk - Default primary key for all models.
+ * @property {string} [col] - Primary key column name.
+ * @property {string} [type] - Primary key column type.
  * @property {string} directory - Path to fixture files.
  * @property {Array.<string>} extensions - Fixture file extensions to search for.
  * @property {object} keys - Configurable keys for storing options relating to this program.
@@ -21,9 +23,12 @@ import Resolver from './lib/resolver.mjs'
 const { assign, keys } = Object
 
 export const DEFAULT_OPTIONS = {
-  pk: 'id',
   extensions: ['mjs', 'js', 'json'],
   snaked: true,
+  pk: {
+    col: 'id',
+    type: 'uuid'
+  },
   keys: {
     options: '_options',
     model: '_model'

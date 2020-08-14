@@ -18,7 +18,7 @@ export default class Model {
   constructor (options, table, data) {
     Object.assign(this, data)
 
-    this[table.pk] = uuid()
+    this.#configure(table)
 
     this[options.keys.options] = {
       ...options,
@@ -29,4 +29,17 @@ export default class Model {
   created_at = NOW
 
   updated_at = NOW
+
+  #configure ({ pk, serial }) {
+    switch (pk.type) {
+    case 'uuid':
+      this[pk.col] = uuid()
+      break
+    case 'serial':
+      this[pk.col] = serial++
+      break
+    default:
+      throw new Error('Invalid primary key column type')
+    }
+  }
 }

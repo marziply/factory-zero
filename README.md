@@ -4,7 +4,7 @@ A [factory_bot](https://github.com/thoughtbot/factory_bot_rails) inspired fixtur
 
 **Currently in early development. Not recommended for production (yet!).**
 
-**Node 14 or higher is required.**
+**Node 14.7.0 or higher is required.**
 
 [Changelog](/CHANGELOG.md) | [Documentation](/DOCS.md) | [License](/LICENSE.md)
 

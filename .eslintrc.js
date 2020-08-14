@@ -21,5 +21,9 @@ module.exports = {
     quotes: ['error', 'single', { avoidEscape: true }],
     semi: ['error', 'never']
   },
-  plugins: ['jsdoc']
+  plugins: [
+    '@babel',
+    '@babel/plugin-syntax-class-properties',
+    'jsdoc'
+  ]
 }

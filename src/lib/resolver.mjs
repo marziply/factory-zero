@@ -1,4 +1,5 @@
 import omit from 'lodash/omit.js'
+import invokeMap from 'lodash/invokeMap.js'
 import { filterValues } from '../utils.mjs'
 import Model from './model.mjs'
 import Table from './table.mjs'
@@ -29,9 +30,7 @@ export default class Resolver {
   fixtures () {
     const { relationMap, insertMap } = this
 
-    for (const item of this.fixtureTables()) {
-      item.resolve(relationMap, insertMap)
-    }
+    invokeMap(this.fixtureTables(), 'resolve', relationMap, insertMap)
 
     return this.insertMap
   }

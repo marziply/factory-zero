@@ -1,6 +1,7 @@
 import pluralize from 'pluralize'
-import defaults from 'lodash/defaults.js'
+import defaultsDeep from 'lodash/defaults.js'
 import upperFirst from 'lodash/upperFirst.js'
+import isString from 'lodash/isString.js'
 import Fixture from './fixture.mjs'
 
 /**
@@ -15,25 +16,37 @@ export default class Table {
    * @param {Fixture} fixture - Fixture instance to bind onto this table instance.
    */
   constructor (options, tableName, { model, data }) {
-    this.pk = model.pk ?? options.pk
     this.name = tableName
     this.data = data
-    this.options = options
-    this.model = this.modelDefaults(model)
+    this.serial = 0
+    this.options = this.configure(model, options)
   }
 
   /**
    * Creates an options object with default values.
    *
    * @param {Model} model - Model instance to build the options against.
+   * @param {ZeroOptions} options - Configuration for Factory Zero.
    *
    * @returns {object} - Defaulted options.
    */
-  modelDefaults (model) {
-    return defaults(model, {
-      name: upperFirst(pluralize.singular(this.name)),
-      pk: this.pk
-    })
+  configure (model, options) {
+    const defaultOpts = {
+      name: upperFirst(pluralize.singular(this.name))
+    }
+
+    return defaultsDeep(defaultOpts, model, options)
+  }
+
+  get pk () {
+    if (isString(this.options.pk)) {
+      return {
+        col: this.options.pk,
+        type: 'uuid'
+      }
+    }
+
+    return this.options.pk
   }
 
   /**
@@ -51,7 +64,8 @@ export default class Table {
    * @returns {Array.<Fixture>} - Collection of Fixture instances.
    */
   get fixtures () {
-    return Object.entries(this.data)
+    return Object
+      .entries(this.data)
       .map(([name, data]) => new Fixture(name, data))
   }
 }
