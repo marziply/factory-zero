@@ -1,6 +1,6 @@
 {
   "name": "factory-zero",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "Knex based fixtures seeding utility",
   "main": "index.mjs",
   "types": "./types.d.ts",

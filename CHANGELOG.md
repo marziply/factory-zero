@@ -1,5 +1,11 @@
 # Changelog
 
+## 2020-08-14 0.4.0
+
+- Added @babel/core and @babel/eslint-parser.
+- Added better configurability with individual models.
+- Added serial primary key support.
+
 ## 2020-08-03 0.3.2
 
 - Possible fix for undefined bug in Resolver module.
