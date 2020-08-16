@@ -66,11 +66,11 @@ export default class Zero {
    */
   seed () {
     return this.setup()
-      .then(() => this.clear())
-      .then(() => this.fixtures())
-      .then(fixtures => this.insert(fixtures))
+      .then(this.clear.bind(this))
+      .then(this.fixtures.bind(this))
+      .then(this.insert.bind(this))
       .catch(console.error)
-      .finally(() => this.db.destroy())
+      .finally(this.db.destroy.bind(this.db))
   }
 
   /**
