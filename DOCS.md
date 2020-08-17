@@ -35,7 +35,9 @@ This supports polymorphism which is configurable via [ZeroOptions].</p>
 
 <dl>
 <dt><a href="#seed">seed(knex, options)</a> ⇒ <code>Promise</code></dt>
-<dd></dd>
+<dd><p>Convenience method that runs Zero.seed() without having to instantiate
+the Zero module.</p>
+</dd>
 <dt><a href="#toJson">toJson(instance)</a> ⇒ <code>object</code></dt>
 <dd><p>Converts a Model instance to a plain object.</p>
 </dd>
@@ -48,8 +50,6 @@ This supports polymorphism which is configurable via [ZeroOptions].</p>
 <dt><a href="#filterValues">filterValues(object, predicate)</a> ⇒ <code>object</code></dt>
 <dd><p>Filters an object via a predicate over the object&#39;s values.</p>
 </dd>
-<dt><a href="#seed">seed(knex, options)</a> ⇒ <code>Promise</code></dt>
-<dd></dd>
 </dl>
 
 ## Typedefs
@@ -474,6 +474,9 @@ Checks if [kx] is an instance of Knex.
 <a name="seed"></a>
 
 ## seed(knex, options) ⇒ <code>Promise</code>
+Convenience method that runs Zero.seed() without having to instantiate
+the Zero module.
+
 **Kind**: global function  
 **Returns**: <code>Promise</code> - - Resolved query.  
 
@@ -531,17 +534,6 @@ Filters an object via a predicate over the object's values.
 | --- | --- | --- |
 | object | <code>object</code> | Object data to filter over. |
 | predicate | <code>function</code> | Test function. |
-
-<a name="seed"></a>
-
-## seed(knex, options) ⇒ <code>Promise</code>
-**Kind**: global function  
-**Returns**: <code>Promise</code> - - Resolved query.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| knex | <code>Knex</code> \| <code>object</code> | Knex instance or a knex connection object. |
-| options | [<code>ZeroOptions</code>](#ZeroOptions) | Factory Zero options. |
 
 <a name="ZeroOptions"></a>
 
