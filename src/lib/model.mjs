@@ -9,7 +9,7 @@ export const NOW = new Date().toISOString()
  *
  * @class Model
  */
-export default class Model {
+class Model {
   /**
    * @param {ZeroOptions} options - Configuration for Factory Zero.
    * @param {Table} table - Table instance defined for this Model.
@@ -43,3 +43,5 @@ export default class Model {
     }
   }
 }
+
+export default Model

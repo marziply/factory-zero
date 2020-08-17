@@ -12,7 +12,7 @@ const { entries } = Object
  *
  * @class Resolver
  */
-export default class Resolver {
+class Resolver {
   /**
    * @param {ZeroOptions} options - Configuration for Factory Zero.
    */
@@ -114,3 +114,5 @@ export default class Resolver {
     }
   }
 }
+
+export default Resolver

@@ -9,7 +9,7 @@ import Fixture from './fixture.mjs'
  *
  * @class Table
  */
-export default class Table {
+class Table {
   /**
    * @param {ZeroOptions} options - Configuration for Factory Zero.
    * @param {string} tableName - Name of the table on this instance.
@@ -38,6 +38,13 @@ export default class Table {
     return defaultsDeep(defaultOpts, model, options)
   }
 
+  /**
+   * Primary key configuration for this Table.
+   *
+   * @type {object}
+   *
+   * @returns {object} - Primary key options for this Table.
+   */
   get pk () {
     if (isString(this.options.pk)) {
       return {
@@ -52,6 +59,8 @@ export default class Table {
   /**
    * All columns defined on the database table this instance refers to.
    *
+   * @type {object}
+   *
    * @returns {object} - Database columns.
    */
   get columns () {
@@ -61,6 +70,8 @@ export default class Table {
   /**
    * A collection of Fixture instances relating to this table instance.
    *
+   * @type {Array.<Fixture>}
+   *
    * @returns {Array.<Fixture>} - Collection of Fixture instances.
    */
   get fixtures () {
@@ -69,3 +80,5 @@ export default class Table {
       .map(([name, data]) => new Fixture(name, data))
   }
 }
+
+export default Table

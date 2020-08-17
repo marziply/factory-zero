@@ -7,11 +7,12 @@ import Resolver from './lib/resolver.mjs'
 
 /**
  * @typedef {object} ZeroOptions - Factory Zero options schema.
+ * @property {Array.<string>} extensions - Fixture file extensions to search for.
+ * @property {boolean} snaked - Should file names be serialised in snake case?
  * @property {string|object} pk - Default primary key for all models.
  * @property {string} [col] - Primary key column name.
  * @property {string} [type] - Primary key column type.
  * @property {string} directory - Path to fixture files.
- * @property {Array.<string>} extensions - Fixture file extensions to search for.
  * @property {object} keys - Configurable keys for storing options relating to this program.
  * @property {string} keys.options - Key to use on Model instances for options.
  * @property {string} keys.model - Key to use for model options within the fixtures.
@@ -44,7 +45,7 @@ export const DEFAULT_OPTIONS = {
  *
  * @class Zero
  */
-export default class Zero {
+class Zero {
   /**
    * @param {object|Knex} connection - Database connection options for this Knex instance.
    * @param {ZeroOptions} options - Configuration for Factory Zero.
@@ -155,3 +156,5 @@ export default class Zero {
     return typeof kx === 'function' && kx.name === 'knex' && kx.context
   }
 }
+
+export default Zero

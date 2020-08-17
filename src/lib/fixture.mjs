@@ -6,7 +6,7 @@ import set from 'lodash/set.js'
  *
  * @class Fixture
  */
-export default class Fixture {
+class Fixture {
   /**
    * @param {string} name - Name of the fixture.
    * @param {object} data - Fixture data.
@@ -49,3 +49,5 @@ export default class Fixture {
     }
   }
 }
+
+export default Fixture
