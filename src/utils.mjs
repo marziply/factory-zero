@@ -2,6 +2,7 @@ import isPlainObject from 'lodash/isPlainObject.js'
 import isArray from 'lodash/isArray.js'
 import debug from 'debug'
 import * as uuidLib from 'uuid'
+import { OPTIONS } from './symbols.mjs'
 
 const {
   keys,
@@ -25,7 +26,7 @@ export const uuid = uuidLib.default?.v4 ?? uuidLib.v4
  */
 export function toJson (instance) {
   const modelMap = keys(instance)
-    .filter(key => !!instance._options.table.columns[key])
+    .filter(key => !!instance[OPTIONS].table.columns[key])
     .map(key => {
       const cell = instance[key]
       const isJson = isPlainObject(cell) || isArray(cell)

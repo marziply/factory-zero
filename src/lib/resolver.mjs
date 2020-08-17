@@ -1,6 +1,6 @@
-import omit from 'lodash/omit.js'
 import invokeMap from 'lodash/invokeMap.js'
 import { filterValues } from '../utils.mjs'
+import { OPTIONS } from '../symbols.mjs'
 import Model from './model.mjs'
 import Table from './table.mjs'
 
@@ -76,8 +76,7 @@ class Resolver {
    * @returns {object} - Collection of relations to resolve later.
    */
   relations (model) {
-    const json = omit(model, [this.options.keys.options])
-    const relations = filterValues(json, v => v?.toString().match(/^@[\w]+/g))
+    const relations = filterValues(model, v => v?.toString().match(/^@[\w]+/g))
 
     this.applyPolymorphism(model, relations)
 
@@ -97,7 +96,7 @@ class Resolver {
       table: { columns },
       suffixes: { type, id },
       fixtures
-    } = model._options
+    } = model[OPTIONS]
 
     for (const [polyName, relationKey] of entries(relations)) {
       const polyType = polyName + type

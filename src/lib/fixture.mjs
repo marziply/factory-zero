@@ -1,4 +1,5 @@
 import set from 'lodash/set.js'
+import { OPTIONS } from '../symbols.mjs'
 
 /**
  * An instance of a single fixture which represents a single
@@ -44,8 +45,9 @@ class Fixture {
   set (model, relations, insertMap) {
     for (const [key, pointer] of Object.entries(relations)) {
       const relation = insertMap.get(pointer)
+      const { col } = relation[OPTIONS].table.pk
 
-      set(model, key, relation[relation._options.table.pk])
+      set(model, key, relation[col])
     }
   }
 }

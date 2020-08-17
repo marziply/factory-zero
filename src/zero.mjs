@@ -14,7 +14,6 @@ import Resolver from './lib/resolver.mjs'
  * @property {string} [type] - Primary key column type.
  * @property {string} directory - Path to fixture files.
  * @property {object} keys - Configurable keys for storing options relating to this program.
- * @property {string} keys.options - Key to use on Model instances for options.
  * @property {string} keys.model - Key to use for model options within the fixtures.
  * @property {object} suffixes - Polymorphic column suffixes.
  * @property {string} suffixes.type - Suffix used for the polymorphic type column.
@@ -31,7 +30,6 @@ export const DEFAULT_OPTIONS = {
     type: 'uuid'
   },
   keys: {
-    options: '_options',
     model: '_model'
   },
   suffixes: {

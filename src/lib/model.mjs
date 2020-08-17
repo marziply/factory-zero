@@ -1,4 +1,5 @@
 import { uuid } from '../utils.mjs'
+import { OPTIONS } from '../symbols.mjs'
 
 export const NOW = new Date().toISOString()
 
@@ -20,7 +21,7 @@ class Model {
 
     this.#configure(table)
 
-    this[options.keys.options] = {
+    this[OPTIONS] = {
       ...options,
       table
     }
