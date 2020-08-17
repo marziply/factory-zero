@@ -38,6 +38,8 @@ seed({
 
 This will insert all the fixtures found in the given directory into your database, automagically resolving all of the associations you define in your fixtures.
 
+You can view the documentation on what options are available for Zero [here](/DOCS.md#ZeroOptions).
+
 ### Fixtures
 
 The formatting of fixtures is important, but easy to follow. Each fixture *file* must export or contain a single object with each child representing a single row of a database. The fixture file itself and the name you save to disk with represents the table of a database. Each fixture row must be named, as per standard JSON, as this enables association resolution. Objects and arrays as column values are allowed, such as for `jsonb` columns, since they are simply stringified before being inserted.
