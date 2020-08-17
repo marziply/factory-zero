@@ -1,5 +1,9 @@
 # Changelog
 
+## 2020-08-17 0.4.1
+
+- Fixed FK resolution bug.
+
 ## 2020-08-14 0.4.0
 
 - Added @babel/core and @babel/eslint-parser.
