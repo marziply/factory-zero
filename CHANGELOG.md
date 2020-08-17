@@ -1,5 +1,10 @@
 # Changelog
 
+## 2020-08-17 0.4.2
+
+- Added missing JSDoc descriptions.
+- Replaced default export of index with a named export.
+
 ## 2020-08-17 0.4.1
 
 - Fixed FK resolution bug.

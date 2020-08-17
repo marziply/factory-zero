@@ -131,7 +131,7 @@ It's worth mentioning that while `name` is not a required option for each fixtur
 
 ## Documentation
 
-The default export is the `Zero` class, but there is a named export called `seed` that instantiates Zero for you while accepting the same arguments. For most standard configurations, `seed` will suffice, unless you're interested in the other methods that Zero provides.
+There are two named exports with Zero: the `Zero` class, and a `seed` function. The `seed` function is purely a convenience method that instantiates Zero for you. For most standard configurations, `seed` will suffice, unless you're interested in the other methods that Zero provides.
 
 All methods and configuration options can be found via the link below.
 
