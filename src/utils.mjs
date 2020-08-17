@@ -49,6 +49,8 @@ export function clone (object) {
 }
 
 /**
+ * Filters an object via a predicate over the object's keys.
+ *
  * @param {object} object - Object data to filter over.
  * @param {Function} predicate - Test function.
  *
@@ -67,6 +69,8 @@ export function filterKeys (object, predicate) {
 }
 
 /**
+ * Filters an object via a predicate over the object's values.
+ *
  * @param {object} object - Object data to filter over.
  * @param {Function} predicate - Test function.
  *

@@ -1,28 +1,11 @@
 /**
  * An instance of a single fixture which represents a single
  * database record.
+ * @param name - Name of the fixture.
+ * @param data - Fixture data.
  */
 declare class Fixture {
-    /**
-     * Resolves all the relations on the fixture.
-     * @param relationMap - Collection of all unresolved relations.
-     * @param insertMap - Collection of all insertable fixtures.
-     */
-    resolve(relationMap: Map<string, object>, insertMap: Map<string, object>): void;
-    /**
-     * Sets data onto the related columns.
-     * @param model - Instance of the current model.
-     * @param relations - Collection of relations to resolve.
-     * @param insertMap - Collection of all insertable fixtures.
-     */
-    set(model: Model, relations: any, insertMap: Map<string, object>): void;
-}
-
-/**
- * An instance of a single fixture which represents a single
- * database record.
- */
-declare class Fixture {
+    constructor(name: string, data: any);
     /**
      * Resolves all the relations on the fixture.
      * @param relationMap - Collection of all unresolved relations.
@@ -42,58 +25,21 @@ declare class Fixture {
  * An instance of a single model which represents an instance
  * of a Fixture, which in turn represents a record in the
  * database.
+ * @param options - Configuration for Factory Zero.
+ * @param table - Table instance defined for this Model.
+ * @param data - Data object to bind to this instance.
  */
 declare class Model {
-}
-
-/**
- * An instance of a single model which represents an instance
- * of a Fixture, which in turn represents a record in the
- * database.
- */
-declare class Model {
+    constructor(options: ZeroOptions, table: Table, data: any);
 }
 
 /**
  * Fixture resolver for resolving table columns and configured relationships.
  * This supports polymorphism which is configurable via [ZeroOptions].
+ * @param options - Configuration for Factory Zero.
  */
 declare class Resolver {
-    /**
-     * Resolves relations and returns a map of all insertable relations.
-     * @returns - All fixtures with relations resolved.
-     */
-    fixtures(): Map<string, object>;
-    /**
-     * Fetches a new instance of Table for each fixture file.
-     * @returns - Unresolved instances of Fixture.
-     */
-    fixtureTables(): Fixture[];
-    /**
-     * Fetches a new instance of Model for each instance of Table.
-     * @param table - Table instance to resolve relations against.
-     * @returns - Unresolved instances of Fixture.
-     */
-    fixtureModels(table: Table): Fixture[];
-    /**
-     * Searches the given fixture model for possible relatable columns.
-     * @param model - Model instance to search for relations on.
-     * @returns - Collection of relations to resolve later.
-     */
-    relations(model: Model): any;
-    /**
-     * Applies polymorphism to columns that can be polymorphically related.
-     * @param model - Model instance to search for polymorphic relations on.
-     * @param relations - Collection of relations to check for polymorphism on.
-     */
-    applyPolymorphism(model: Model, relations: any): void;
-}
-
-/**
- * Fixture resolver for resolving table columns and configured relationships.
- * This supports polymorphism which is configurable via [ZeroOptions].
- */
-declare class Resolver {
+    constructor(options: ZeroOptions);
     /**
      * Resolves relations and returns a map of all insertable relations.
      * @returns - All fixtures with relations resolved.
@@ -126,33 +72,12 @@ declare class Resolver {
 
 /**
  * An instance of an individual database table.
+ * @param options - Configuration for Factory Zero.
+ * @param tableName - Name of the table on this instance.
+ * @param fixture - Fixture instance to bind onto this table instance.
  */
 declare class Table {
-    /**
-     * Creates an options object with default values.
-     * @param model - Model instance to build the options against.
-     * @param options - Configuration for Factory Zero.
-     * @returns - Defaulted options.
-     */
-    configure(model: Model, options: ZeroOptions): any;
-    /**
-     * Primary key configuration for this Table.
-     */
-    pk: any;
-    /**
-     * All columns defined on the database table this instance refers to.
-     */
-    columns: any;
-    /**
-     * A collection of Fixture instances relating to this table instance.
-     */
-    fixtures: Fixture[];
-}
-
-/**
- * An instance of an individual database table.
- */
-declare class Table {
+    constructor(options: ZeroOptions, tableName: string, fixture: Fixture);
     /**
      * Creates an options object with default values.
      * @param model - Model instance to build the options against.
@@ -249,6 +174,7 @@ declare function toJson(instance: Model): any;
 declare function clone(object: any): any;
 
 /**
+ * Filters an object via a predicate over the object's keys.
  * @param object - Object data to filter over.
  * @param predicate - Test function.
  * @returns - Filtered object.
@@ -256,6 +182,7 @@ declare function clone(object: any): any;
 declare function filterKeys(object: any, predicate: (...params: any[]) => any): any;
 
 /**
+ * Filters an object via a predicate over the object's values.
  * @param object - Object data to filter over.
  * @param predicate - Test function.
  * @returns - Filtered object.
@@ -271,7 +198,6 @@ declare function filterValues(object: any, predicate: (...params: any[]) => any)
  * @property [type] - Primary key column type.
  * @property directory - Path to fixture files.
  * @property keys - Configurable keys for storing options relating to this program.
- * @property keys.options - Key to use on Model instances for options.
  * @property keys.model - Key to use for model options within the fixtures.
  * @property suffixes - Polymorphic column suffixes.
  * @property suffixes.type - Suffix used for the polymorphic type column.
@@ -285,7 +211,6 @@ declare type ZeroOptions = {
     type?: string;
     directory: string;
     keys: {
-        options: string;
         model: string;
     };
     suffixes: {
@@ -296,54 +221,11 @@ declare type ZeroOptions = {
 
 /**
  * Entry class instance for Factory Zero.
+ * @param connection - Database connection options for this Knex instance.
+ * @param options - Configuration for Factory Zero.
  */
 declare class Zero {
-    /**
-     * Seeding method that runs all the necessary queries to seed all available fixtures
-     * into the configured database.
-     * @returns - A chained Promise instance of all queries on this instance.
-     */
-    seed(): Promise;
-    /**
-     * Sets up Factory Zero for seeding by loading fixtures and fetching schema
-     * information via information_schema.
-     */
-    setup(): void;
-    /**
-     * Clears data from all tables found in the fixtures directory.
-     * @returns - A collection of all DELETE queries.
-     */
-    clear(): Promise;
-    /**
-     * Insert all fixtures into the configured database with all fixtures
-     * found in the fixtures directory.
-     * @param fixtures - All fixtures to insert into the database.
-     * @returns - A collection of all INSERT queries.
-     */
-    insert(fixtures: Map<string, object>): Promise;
-    /**
-     * Fetches all fixtures with all relations resolved via lib/Resolver.
-     * @returns - A collection of all fixtures ready to insert.
-     */
-    fixtures(): Map<string, object>;
-    /**
-     * Creates an individual Knex database instance.
-     * @param kx - Knex connection instance.
-     * @returns - Knex database instance.
-     */
-    createKnex(kx: any | Knex): Knex;
-    /**
-     * Checks if [kx] is an instance of Knex.
-     * @param kx - Any value that might be an instance of Knex.
-     * @returns - Is [kx] an instance of Knex?
-     */
-    isKnex(kx: any): boolean;
-}
-
-/**
- * Entry class instance for Factory Zero.
- */
-declare class Zero {
+    constructor(connection: any | Knex, options: ZeroOptions);
     /**
      * Seeding method that runs all the necessary queries to seed all available fixtures
      * into the configured database.

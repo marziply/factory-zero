@@ -40,8 +40,6 @@ export const DEFAULT_OPTIONS = {
 
 /**
  * Entry class instance for Factory Zero.
- *
- * @class Zero
  */
 class Zero {
   /**

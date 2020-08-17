@@ -4,8 +4,6 @@ import { OPTIONS } from '../symbols.mjs'
 /**
  * An instance of a single fixture which represents a single
  * database record.
- *
- * @class Fixture
  */
 class Fixture {
   /**

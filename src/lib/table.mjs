@@ -6,8 +6,6 @@ import Fixture from './fixture.mjs'
 
 /**
  * An instance of an individual database table.
- *
- * @class Table
  */
 class Table {
   /**

@@ -7,8 +7,6 @@ export const NOW = new Date().toISOString()
  * An instance of a single model which represents an instance
  * of a Fixture, which in turn represents a record in the
  * database.
- *
- * @class Model
  */
 class Model {
   /**

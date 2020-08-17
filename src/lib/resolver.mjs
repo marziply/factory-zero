@@ -9,8 +9,6 @@ const { entries } = Object
 /**
  * Fixture resolver for resolving table columns and configured relationships.
  * This supports polymorphism which is configurable via [ZeroOptions].
- *
- * @class Resolver
  */
 class Resolver {
   /**
