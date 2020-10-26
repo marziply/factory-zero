@@ -1,5 +1,9 @@
 # Changelog
 
+## 2020-10-26 0.4.3
+
+- Updated Knex.
+
 ## 2020-08-17 0.4.2
 
 - Added missing JSDoc descriptions.
