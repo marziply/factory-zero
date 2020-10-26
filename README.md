@@ -4,7 +4,11 @@ A [factory_bot](https://github.com/thoughtbot/factory_bot_rails) inspired fixtur
 
 **Currently in early development. Not recommended for production (yet!).**
 
+*The core features of this package are done, what remains are tests and a few other small features. When I have the time to do so, I will work on those. Pull requests are very welcome!*
+
 **Node 14.7.0 or higher is required.**
+
+*A backwards compatible version for older Node.js apps is possible, I just need to find the time to implement them. Pull requests are always welcome!*
 
 [Changelog](/CHANGELOG.md) | [Documentation](/DOCS.md) | [License](/LICENSE.md)
 
