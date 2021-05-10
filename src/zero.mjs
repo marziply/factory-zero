@@ -41,7 +41,7 @@ export const DEFAULT_OPTIONS = {
 /**
  * Entry class instance for Factory Zero.
  */
-class Zero {
+export class Zero {
   /**
    * @param {object|Knex} connection - Database connection options for this Knex instance.
    * @param {ZeroOptions} options - Configuration for Factory Zero.
@@ -107,12 +107,18 @@ class Zero {
    * @returns {Promise} - A collection of all INSERT queries.
    */
   async insert (fixtures) {
-    const queries = Array.from(fixtures).map(([path, fixture]) => {
-      const [nameSection] = path.split('.')
-      const tableName = nameSection.slice(1)
+    const queries = Array
+      .from(fixtures)
+      .map(([path, fixture]) => {
+        const tableName = path
+          .split('.')
+          .shift()
+          .slice(1)
 
-      return this.db(tableName).insert(toJson(fixture))
-    })
+        return this
+          .db(tableName)
+          .insert(toJson(fixture))
+      })
 
     await Promise.all(queries)
 
@@ -152,5 +158,3 @@ class Zero {
     return typeof kx === 'function' && kx.name === 'knex' && kx.context
   }
 }
-
-export default Zero

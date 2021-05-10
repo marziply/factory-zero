@@ -9,7 +9,7 @@ import Zero from './src/zero.mjs'
  *
  * @returns {Promise} - Resolved query.
  */
-async function seed (knex, options) {
+function seed (knex, options) {
   return new Zero(knex, options).seed()
 }
 
