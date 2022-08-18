@@ -2,7 +2,11 @@
 
 A [factory_bot](https://github.com/thoughtbot/factory_bot_rails) inspired fixtures seeding utility with seamless associations.
 
-**Currently in early development. Not recommended for production (yet!).**
+**Archival notice**
+
+This package had potential but it never gained significant traction. The core functionality works but tests are lacking, so I wouldn't deem this fit for production.
+
+---
 
 *The core features of this package are done, what remains are tests and a few other small features. When I have the time to do so, I will work on those. Pull requests are very welcome!*
 
